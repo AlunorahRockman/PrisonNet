@@ -1,0 +1,51 @@
+.coucheValidation{
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--dark1);
+    border-radius: var(--radius);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+h1 {
+    text-align: center;
+    color: var(--orange);
+} 
+.input-group {
+    margin-bottom: 10px;
+} 
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--gray);
+}  
+.input-group input {
+    padding: 10px;
+    width: 93%;
+    border-radius: var(--radius);
+    border: 1px solid var(--gray);
+    background-color: var(--dark3);
+    color: var(--white);
+    text-align: center;
+    height: 40px;
+    font-size: var(--font7);
+}
+.input-group input:focus{
+    outline: none;
+}
+.btnValidation {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    font-size: var(--font5);
+    height: 60px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btnValidation:hover {
+    background-color: var(--orange1);
+}

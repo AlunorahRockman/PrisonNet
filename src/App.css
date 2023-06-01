@@ -1,0 +1,77 @@
+
+:root {
+  --dark: #101013;
+  --dark0: #0f0f0f;
+  --dark1: #121214;
+  --dark2: #212122;
+  --dark3: #313131;
+  --gray: gray;
+  --orange: #ec7b02;
+  --orange1: #f79730;
+  --orange2: #f7ac5d;
+  --white: #f5f5f5;
+  --white1: #e0dcdc;
+  --red: red;
+  --red1: rgb(243, 75, 75); 
+  --font: 8px;
+  --font1: 10px;
+  --font2: 13px;
+  --font3: 15px;
+  --font4: 18px;
+  --font5: 20px;
+  --font6: 23px;
+  --font7: 25px;
+  --hauteur: 50px;
+  --hauteur1: 55px;
+  --hauteur2: 60px;
+  --hauteur3: 62px;
+  --radius: 5px;
+  --radius1: 10px;
+  --radius2: 15px;
+  --radius3: 20px;
+}
+
+@font-face {
+  font-family: 'MaFonte';
+  src: url('./Outils/font/Helvetica.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+*{
+  transition: .2s ease-in-out;
+  font-family: 'MaFonte', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #413c3c;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #525135;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #807e7e;
+}
+
+::-webkit-scrollbar-button {
+  background-color: var(--orange);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #a581e7;
+}
+
+.App {
+  text-align: center;
+  background: var(--dark);
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

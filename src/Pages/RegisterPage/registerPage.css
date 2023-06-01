@@ -1,0 +1,151 @@
+.corpRegister{
+    background: var(--dark1);
+}
+.coucheRegister{
+    display: flex;
+}
+
+.gaucheRegister{
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    background: var(--dark0);
+}
+.droitRegister{
+    width: 80%;
+    height: fit-content;
+    margin-left: 20%;
+}
+.boutonRegister{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+.titreRegister{
+    padding: 5%;
+}
+.password-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.password-input .password-toggle{
+    background: var(--dark0);
+    height: var(--hauteur3);
+    color: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius) 0 0 var(--radius);
+    padding-left: 10px;
+    padding-right: 10px;
+    border-top: 1px solid var(--orange);
+    border-left: 1px solid var(--orange);
+    border-bottom: 1px solid var(--orange);
+}
+.inputInterneMotdepasse{
+    width: 100%;
+    height: var(--hauteur2);
+    font-size: var(--font4);
+    background: var(--dark0);
+    color: var(--white1);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.inputInterneMotdepasse:focus{
+    outline: none;
+    border-top: 1px solid var(--orange);
+    border-right: 1px solid var(--orange);
+    border-bottom: 1px solid var(--orange);
+}
+.titreRegister p{
+    color: var(--orange);
+    width: 100%;
+    text-align: left;
+    font-size: var(--font6);
+    margin: 0;
+}
+.buttonReg{
+    background: var(--orange);
+    color: var(--white);
+    height: var(--hauteur1);
+    border: none;
+    font-size: var(--font5);
+    border-radius: var(--radius1) var(--radius) var(--radius1) var(--radius);
+    width: 40%;
+    margin-top: 10px;
+}
+.verConnexion{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border-radius: var(--radius);
+}
+.verConnexion:hover{
+    background: var(--dark2);
+}
+.verConnexion p{
+    width: 100%;
+    color: var(--gray);
+    text-align: center;
+    text-decoration: none;
+}
+.coucheGauche{
+    padding: 1%;
+}
+.coucheGauche a{
+    text-decoration: none;
+}
+.verConnexion:hover p{
+    color: var(--orange1);
+}
+.buttonReg:hover{
+    background: var(--orange1);
+}
+.droitRegister{
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.coucheDroit{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 5%;
+}
+.inputRegister{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:7px;
+}
+.inputInterne{
+    width: 100%;
+    height: var(--hauteur2);
+    font-size: var(--font4);
+    background: var(--dark0);
+    color: var(--white1);
+    border-radius: var(--radius);
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.inputInterne:focus{
+    border-radius: var(--radius1);
+    outline: 1px var(--orange);
+    outline-style: dotted;
+}
+.inputRegister label{
+    color: var(--gray);
+    width: 100%;
+    text-align: left;
+}
+
+
+
