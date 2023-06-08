@@ -1,0 +1,41 @@
+.input-groupOublie {
+    margin-bottom: 10px;
+} 
+
+.input-groupOublie label {
+    display: block;
+    text-align: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    color: var(--gray);
+}  
+
+.input-groupOublie input {
+    height: var(--hauteur2);
+    border-radius: var(--radius1);
+    color: var(--white1);
+    background: var(--dark2);
+    border: 1px solid var(--gray);
+    border: none;
+    font-size: var(--font5);
+    padding: 0 10px 0 10px;
+    width: 93%;
+}
+
+.input-groupOublie input:focus{
+    outline: none;
+}
+
+.p{
+    color: var(--gray);
+    margin-bottom: 0;
+}
+
+.a{
+    text-decoration: none;
+    color: var(--orange);
+}
+.a:hover{
+    color: var(--orange1);
+    text-decoration: underline;
+}

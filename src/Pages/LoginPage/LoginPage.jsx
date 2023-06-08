@@ -15,14 +15,14 @@ const [values, setValues] = useState({
 
 const [errors, setErrors] = useState([])
 
-const navigte = useNavigate()
+const navigate = useNavigate()
 
 const handleSubmit = (e) => {
   e.preventDefault()
   axios.post('http://localhost:5000/loginUser', values)
   .then(res => {
       console.log(res.data)
-      navigte('/homePage')
+      navigate('/homePage')
   })
   .catch(err => {
       console.log(err)
@@ -82,9 +82,11 @@ const handleSubmit = (e) => {
                 <button className='button'>Se connecter</button>
               </div>
             </form>
-            <div className="oublie">
-              <p>Mot de passe oublié !</p>
-            </div>
+            <Link to={'/passOubliePage'}>
+              <div className="oublie">
+                <p>Mot de passe oublié !</p>
+              </div>
+            </Link>
             <hr className='hr' />
             <div className="bouton1">
               <Link to={'/registerPage'}>

@@ -1,0 +1,26 @@
+.labelNouvelle{
+    margin-top: 10px;
+}
+.coucheValidationNouvelle{
+    max-width: 500px;
+    max-height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--dark1);
+    border-radius: var(--radius);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+
+.input-groupOublie input {
+    padding: 10px;
+    width: 95%;
+    border-radius: var(--radius1);
+    border: 1px solid var(--gray);
+    background-color: var(--dark3);
+    color: var(--white);
+    height: 40px;
+    font-size: var(--font5);
+}
+.input-groupOublie input:focus{
+    outline: none;
+}

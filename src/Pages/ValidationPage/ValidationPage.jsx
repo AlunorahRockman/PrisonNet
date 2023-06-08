@@ -1,5 +1,5 @@
 import errorIcon from "../../Outils/icon/error.ico";
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import "./validationPage.css"
@@ -12,6 +12,7 @@ function ValidationPage() {
     idUser: id,
     code: 0
   })
+
   const [valuesUser, setValuesUser] = useState({
     idUser: id
   })

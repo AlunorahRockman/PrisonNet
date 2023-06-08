@@ -100,8 +100,7 @@
 }
 .oublie p:hover{
     color: var(--orange2);
-    text-decoration: underline
-    ;
+    text-decoration: underline;
 }
 
 .form .cover{
@@ -139,6 +138,9 @@
     outline: 0.1px solid var(--orange2);
     outline: none;
     /* outline-style:dotted; */
+}
+.cover a{
+    text-decoration: none;
 }
 
 .button{

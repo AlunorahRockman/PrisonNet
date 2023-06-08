@@ -9,6 +9,7 @@
 h1 {
     text-align: center;
     color: var(--orange);
+    font-size: var(--font6);
 } 
 .input-group {
     margin-bottom: 10px;
@@ -20,13 +21,13 @@ h1 {
 }  
 .input-group input {
     padding: 10px;
-    width: 93%;
-    border-radius: var(--radius);
+    width: 94%;
+    border-radius: var(--radius1);
     border: 1px solid var(--gray);
     background-color: var(--dark3);
     color: var(--white);
     text-align: center;
-    height: 40px;
+    height: var(--hauteur1);
     font-size: var(--font7);
 }
 .input-group input:focus{
@@ -42,8 +43,8 @@ h1 {
     color: #fff;
     border: none;
     font-size: var(--font5);
-    height: 60px;
-    border-radius: 4px;
+    height: var(--hauteur1);
+    border-radius: var(--radius1);
     cursor: pointer;
 }
 .btnValidation:hover {
