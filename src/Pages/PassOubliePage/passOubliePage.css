@@ -1,5 +1,7 @@
 .input-groupOublie {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 } 
 
 .input-groupOublie label {
@@ -19,7 +21,6 @@
     border: none;
     font-size: var(--font5);
     padding: 0 10px 0 10px;
-    width: 93%;
 }
 
 .input-groupOublie input:focus{

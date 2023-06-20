@@ -1,0 +1,119 @@
+.gauchePrisonnier{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    background: var(--dark1);
+    width: 20%;
+    margin-top: 61px;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+}
+
+
+.droitePrisonniers{
+    margin-left: 20%;
+    margin-top: 61px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    min-height: 100vh;
+    background: var(--black);
+    padding: 20px;
+}
+
+.contenuePrisonnier{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+    background: var(--dark1);
+    height: 300px;
+    border-radius: 10px;
+    border: 0.1px solid var(--gray-);
+}
+
+.imagePrisonnier{
+    display: flex;
+    width: 100%;
+    height: 50%;
+}
+
+.imagePrisonnier img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px 10px 0 0;
+
+}
+.titrePrisonnier{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    text-align: left;
+    height: 35%;
+}
+.titrePrisonnier p{
+    margin: 0;
+    padding: 10px;
+    color: var(--orange);
+}
+.titrePrisonnier h5{
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    color: var(--gray);
+}
+.titrePrisonnier h6{
+    margin: 0;
+    padding-left: 10px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    color: var(--gray);
+}
+.buttonPrisonnier{
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.buttonIray{
+    background: var(--orange);
+    border: none;
+    border-radius: 5px;
+    color: var(--white);
+    height: 40px;
+    width: 90%;
+}
+
+.buttonIray:hover{
+    background: var(--orange1);
+    color: var(--black);
+}
+
+.rechercherDiv{
+    display: flex;
+    flex-direction: column;
+}
+
+.rechercherDiv input{
+    background: var(--dark2);
+    border: none;
+    color: var(--gray);
+    border-radius: 5px;
+    padding-left: 10px;
+    height: 40px;
+}
+.rechercherDiv input:focus{
+    outline: none;
+}

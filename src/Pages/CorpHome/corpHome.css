@@ -1,0 +1,255 @@
+.corpHome{
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.gaucheHome{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    background: var(--dark1);
+    width: 20%;
+    margin-top: 61px;
+    position: fixed;
+    left: 0;
+    height: 100vh;
+}
+
+.coucheGauche{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.image{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.coucheGauche .contenue{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 15px;
+}
+.coucheGauche .contenue:hover{
+    background: var(--dark2);
+    border-radius: 5px;
+}
+.coucheGauche .contenue p{
+    color: var(--gray);
+    font-size: var(--font3);
+}
+.droiteHome{
+    margin-left: 20%;
+    margin-top: 61px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    min-height: 100vh;
+    background: var(--black);
+    padding: 20px;
+}
+.coucheDroite{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100vh;
+}
+
+.coucheDroite .hautDroite{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.coucheDroite .basDroite{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--dark1);
+    border-radius: 10px;
+}
+
+.hautDroite .contenueBox{
+    width: 33.33%;
+    background: var(--dark1);
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    box-shadow: 2px 7px 40px 2px var(--dark1);
+}
+
+/* ************************** */
+
+.hautDroite .contenueBox:hover{
+    background: var(--orange);
+}
+
+.hautDroite .contenueBox:hover .textBox h2,
+.hautDroite .contenueBox:hover .textBox p{
+    color: var(--black);
+}
+
+.imageBox{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+}
+.textBox{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.textBox h2{
+    font-size: var(--font3);
+    color: var(--gray);
+    margin: 0;
+    padding: 0;
+}
+
+.textBox p{
+    font-size: var(--font5);
+    color: var(--orange);
+    margin: 0;
+    padding: 0;
+}
+
+.imageBox img{
+    height: 60%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.topTable{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--orange);
+    align-items: center;
+}
+.divTitre{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.divTitre h2{
+    margin: 0;
+    padding: 0;
+    color: var(--orange);
+    font-size: var(--font3);
+}
+
+.divLink{
+    margin-right: 10px;
+}
+
+.divLink a{
+    text-decoration: none;
+    font-size: var(--font3);
+}
+
+.topTable a p{
+    padding: 7px 10px 7px 10px;
+    margin: 0;
+    color: var(--white);
+    background: var(--orange);
+    border-radius: 5px;
+    font-size: var(--font3);
+}
+
+.tablePers{
+    width: 100%;
+    height: 90%;
+}
+
+.tablePers table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tablePers table thead tr td {
+    /* font-weight: 600; */
+    color: var(--white);
+    font-size: var(--font3);
+}
+/* .tablePers table tr:first-child {
+    border-top: 1px solid var(--dark3);
+} */
+
+.tablePers table tr {
+    color: var(--gray);
+    border-bottom: 1px solid var(--dark3);
+}
+.tablePers table tr:last-child {
+    border-bottom: none;
+}
+.tablePers table tbody tr:hover {
+    background: var(--orange);
+    color: var(--black);
+}
+.tablePers table tr td {
+    padding: 10px;
+}
+.tablePers table tr td:last-child {
+    text-align: end;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 5px;
+}
+.tablePers table tr td:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 5px;
+    width: 40px;
+}
+.tablePers table tr td:nth-child(2) {
+    text-align: center;
+    width: 20%;
+}
+.tablePers table tr td:nth-child(3) {
+    text-align: center;
+    width: 10px;
+}
+/* .tablePers table tr td:nth-child(5) {
+    width: 60%;
+} */
+
+.tablePers table tbody tr td{
+    font-size: var(--font2);
+}
+
+.tablePers table tbody tr td img {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.tablePers table tbody tr td img:hover {
+    /* width: 120px;
+    height: 120px;
+    border: 2px solid var(--orange);
+    position: absolute;
+    margin-left: -40px;
+    z-index: 1; */
+}

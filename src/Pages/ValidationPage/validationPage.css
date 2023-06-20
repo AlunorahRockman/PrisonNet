@@ -13,6 +13,8 @@ h1 {
 } 
 .input-group {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 } 
 .input-group label {
     display: block;
@@ -21,7 +23,6 @@ h1 {
 }  
 .input-group input {
     padding: 10px;
-    width: 94%;
     border-radius: var(--radius1);
     border: 1px solid var(--gray);
     background-color: var(--dark3);

@@ -5,6 +5,8 @@ import passwdIcon from "../../Outils/icon/passwd.ico";
 import errorIcon from "../../Outils/icon/error.ico";
 import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../../hooks/useAuth';
+import jwtDecode from 'jwt-decode';
 
 function LoginPage() {
 
@@ -17,11 +19,15 @@ const [errors, setErrors] = useState([])
 
 const navigate = useNavigate()
 
+const {setUser}=useAuth()
+
 const handleSubmit = (e) => {
   e.preventDefault()
   axios.post('http://localhost:5000/loginUser', values)
   .then(res => {
-      console.log(res.data)
+      const user = jwtDecode(res.data.access)
+      localStorage.setItem("token", JSON.stringify(res.data))
+      setUser(user) 
       navigate('/homePage')
   })
   .catch(err => {

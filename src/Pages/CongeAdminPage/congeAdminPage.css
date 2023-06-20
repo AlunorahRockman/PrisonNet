@@ -1,0 +1,135 @@
+.coucheConge{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.coucheConge .contenueBox{
+    width: 32%;
+    height: 200px;
+    background: var(--dark1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenueBox .coucheBox{
+    width: 100%;
+    height: 100%;
+}
+
+.topConge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70%;
+}
+.basConge{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.coucheBtn{
+    height: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+}
+
+
+.coucheBtn .acceptBtn:hover{
+    background: var(--orange1);
+    color: var(--black);
+}
+
+.coucheBtn .reffusBtn:hover{
+    background: var(--gray);
+}
+
+.coucheBtn .acceptBtn{
+    width: 50%;
+    background: var(--orange);
+    border: none;
+    color: var(--white);
+    height: 40px;
+    border-radius: 5px;
+}
+
+.coucheBtn .reffusBtn{
+    width: 50%;
+    background: var(--dark3);
+    border: none;
+    color: var(--white);
+    height: 40px;
+    border-radius: 5px;
+}
+.photoConge{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.photoConge img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.textConge{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    padding: 10px;
+    height: 100%;
+}
+
+.textConge p{
+    margin-top: 5px;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    padding: 0;
+    font-size: var(--font5);
+    text-align: left;
+    color: var(--orange);
+}
+
+.textConge h1{
+    margin: 0;
+    padding: 0;
+    font-size: var(--font2);
+    text-align: left;
+    color: var(--gray);
+}
+.textConge h2{
+    margin: 0;
+    padding: 0;
+    font-size: var(--font2);
+    text-align: left;
+    color: var(--gray);
+}
+
+.titreConge p{
+    color: var(--gray);
+}
+
+
+
+
+

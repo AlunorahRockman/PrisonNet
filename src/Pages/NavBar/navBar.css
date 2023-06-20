@@ -1,0 +1,147 @@
+.navContainer{
+    display: flex;
+    flex-direction: column;
+    background: var(--dark2);
+    width: 100%;
+    border-bottom: 1px solid var(--dark3);
+    position: fixed;
+}
+.navContainer .navCouche{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+
+.navCouche .navPrim{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+.navPrim img{
+    width: 30px;
+    height: 30px;
+}
+.iconPrim img{
+    width: 20px;
+    height: 20px;
+}
+.iconDem img{
+    width: 20px;
+    height: 20px;
+}
+
+.navCouche .navDem{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.iconPrison{
+    background: var(--green);
+    border-radius: 50%;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.textPrison{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textPrison p{
+    color: var(--orange);
+    font-size: var(--font5);
+    padding-left: 0px;
+    padding-right: 9px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin-left: 0px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    margin-right: 9px;
+}
+.navDem .iconPrim{
+    display: flex;
+    align-items: center;
+    background: var(--dark3);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.iconPrim:hover{
+    background: var(--gray);
+}
+.iconDem:hover{
+    background: var(--gray);
+}
+
+.iconDem{
+    display: flex;
+    align-items: center;
+    background: var(--dark3);
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.navDem .photo img{
+    width: 39px;
+    height: 39px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+}
+
+.navDem .photo{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.navDem .photo .photo-bg{
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    position: absolute;
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+}
+
+.navDem .photo:hover img{
+    border: 1px solid var(--gray);
+}
+.navDem .photo:hover .photo-bg{
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+.navDem button img{
+    width: 30px;
+    height: 30px;
+}
+
+.navDem button{
+    border: none;
+    background: var(--dark3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+}
+.navDem button:hover{
+    background: var(--gray);
+}
+

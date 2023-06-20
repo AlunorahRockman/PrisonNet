@@ -44,7 +44,7 @@ function PassOubliePage() {
                 <form onSubmit={handleSubmit}>
                     <div class="input-groupOublie">
                         <label for="code">Entrer votre andresse email</label>
-                        <input className='inputInterne' onChange={e => setValues({...values, email: e.target.value})} id='email' placeholder='example@gmail.com'/>
+                        <input onChange={e => setValues({...values, email: e.target.value})} id='email' placeholder='example@gmail.com'/>
                     </div>
                     <hr className='hr'/>
                     {

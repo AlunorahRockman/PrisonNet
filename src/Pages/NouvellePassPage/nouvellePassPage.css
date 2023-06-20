@@ -13,7 +13,6 @@
 
 .input-groupOublie input {
     padding: 10px;
-    width: 95%;
     border-radius: var(--radius1);
     border: 1px solid var(--gray);
     background-color: var(--dark3);
