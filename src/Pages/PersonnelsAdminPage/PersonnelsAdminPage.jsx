@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import retourIcon from "../../Outils/icon/retour.ico";
 import aina from "../../Outils/icon/aina.png";
+import { FaSearch } from 'react-icons/fa';
 import './personnelsAdminPage.css'
 
 function PersonnelsAdminPage() {
@@ -24,7 +25,9 @@ function PersonnelsAdminPage() {
                         <div className="divTitre">
                             <h2>Personnels</h2>
                         </div>
-                        <div className="divLink">
+                        <div className="divInputRecherche">
+                            <FaSearch className="search-icon" />
+                            <input type="text" placeholder='Rechercher...'/>
                         </div>
                     </div>
                     <div className="tablePers">
@@ -89,6 +92,37 @@ function PersonnelsAdminPage() {
                                         </Link>
                                     </td>    
                                 </tr>
+                                <tr>
+                                    <td><img src={aina}/></td>
+                                    <td>Aina Tolotriniavo</td>
+                                    <td>Alunorah</td>
+                                    <td>Moramanga</td>
+                                    <td>034 56 896 25</td>
+                                    <td>Developpement</td>
+                                    <td>Dev</td>
+                                    <td>2000000 Ar</td>
+                                    <td>
+                                        <Link to={'/'}>
+                                            <button className='btnKely'>Afficher</button>
+                                        </Link>
+                                    </td>    
+                                </tr>
+                                <tr>
+                                    <td><img src={aina}/></td>
+                                    <td>Aina Tolotriniavo</td>
+                                    <td>Alunorah</td>
+                                    <td>Moramanga</td>
+                                    <td>034 56 896 25</td>
+                                    <td>Developpement</td>
+                                    <td>Dev</td>
+                                    <td>2000000 Ar</td>
+                                    <td>
+                                        <Link to={'/'}>
+                                            <button className='btnKely'>Afficher</button>
+                                        </Link>
+                                    </td>    
+                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

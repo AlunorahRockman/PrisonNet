@@ -1,0 +1,8 @@
+.textConge h2 a{
+    text-decoration: none;
+    color: var(--orange1);
+}
+
+.textConge h2 a:hover{
+    text-decoration: underline;
+}

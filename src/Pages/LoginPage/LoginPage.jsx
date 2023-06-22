@@ -3,7 +3,7 @@ import "./loginPage.css";
 import emailIcon from "../../Outils/icon/email.ico";
 import passwdIcon from "../../Outils/icon/passwd.ico";
 import errorIcon from "../../Outils/icon/error.ico";
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, Navigate, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
 import jwtDecode from 'jwt-decode';
@@ -19,7 +19,7 @@ const [errors, setErrors] = useState([])
 
 const navigate = useNavigate()
 
-const {setUser}=useAuth()
+const {setUser, user}=useAuth()
 
 const handleSubmit = (e) => {
   e.preventDefault()
@@ -28,7 +28,7 @@ const handleSubmit = (e) => {
       const user = jwtDecode(res.data.access)
       localStorage.setItem("token", JSON.stringify(res.data))
       setUser(user) 
-      navigate('/homePage')
+      navigate('/')
   })
   .catch(err => {
       console.log(err)
@@ -38,7 +38,7 @@ const handleSubmit = (e) => {
   })
 }
 
-  return (
+  return !user ?(
     <div className='corp'>
       <div className="couche">
         <div className="presentation">
@@ -103,7 +103,7 @@ const handleSubmit = (e) => {
         </div>
       </div>
     </div>
-  )
+  ):(<Navigate to={"/"}/>)
 }
 
 export default LoginPage;

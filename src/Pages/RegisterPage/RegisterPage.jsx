@@ -67,7 +67,7 @@ function RegisterPage() {
                             <p>Créer un compte</p>
                         </div>
                         <hr className='hr' />
-                        <Link to={'/'}>
+                        <Link to={'/login'}>
                             <div className="verConnexion">
                                 <p>Se connecter</p>
                             </div>

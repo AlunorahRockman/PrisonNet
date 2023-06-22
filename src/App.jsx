@@ -17,15 +17,15 @@ function App() {
         <AuthProvider>
           <BrowserRouter>
             <Routes>
-              <Route path='/' element={<LoginPage/>}/>
+              <Route path={"/*"} element={<PrivateRoot/>}/>
+              <Route path='/login' element={<LoginPage/>}/>
               <Route path='/registerPage' element={<RegisterPage/>}/>
               <Route path='/verifierCode/:id' element={<VerifierCodePage/>}/>
               <Route path='/passOubliePage' element={<PassOubliePage/>}/>
               <Route path='/nouvellePass/:id' element={<NouvellePassPage/>}/>
-              <Route path={"/homePage"} element={<PrivateRoot/>}/>
               <Route path='/validationPage/:id' element={<ValidationPage/>}/>
             </Routes>
-        </BrowserRouter>
+          </BrowserRouter>
         </AuthProvider>
     </div>
 

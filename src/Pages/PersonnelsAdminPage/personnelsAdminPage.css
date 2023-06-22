@@ -4,6 +4,33 @@
     width: 100%;
 }
 
+.divInputRecherche{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-icon {
+    z-index: 1;
+    color: var(--orange);
+    margin-right: -30px;
+}
+
+.divInputRecherche input{
+    background: var(--dark2);
+    border: none;
+    color: var(--gray);
+    border-radius: 10px;
+    padding-left: 40px;
+    height: 40px;
+}
+
+.divInputRecherche input:focus{
+    outline: none;
+}
+
 .gauchePers{
     display: flex;
     flex-direction: column;
@@ -14,6 +41,12 @@
     position: fixed;
     left: 0;
     height: 100vh;
+}
+
+.droitePers .basDroite{
+    background: var(--dark1);
+    border-radius: 10px;
+    min-height: 100vh;
 }
 
 .droitePers{

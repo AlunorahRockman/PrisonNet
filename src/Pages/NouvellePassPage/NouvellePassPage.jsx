@@ -23,7 +23,7 @@ function NouvellePassPage() {
     axios.post('http://localhost:5000/modifierMotdepasse', values)
     .then(res => {
       console.log(res)
-      navigate('/')
+      navigate('/login')
     })
     .catch(err => {
       console.log(err)

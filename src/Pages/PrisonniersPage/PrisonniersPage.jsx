@@ -11,7 +11,7 @@ function PrisonniersPage() {
             <div className="gauchePrisonnier">
                 <div className="coucheGauche">
                     <div className="titreConge">
-                        <p>Prisonniers</p>
+                        <p>Détenus</p>
                     </div>
                     <div className="rechercherDiv">
                         <input type="text" placeholder='Rechercher...'/>

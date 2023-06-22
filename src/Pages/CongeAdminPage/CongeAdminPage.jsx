@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import retourIcon from "../../Outils/icon/retour.ico";
 import aina from "../../Outils/icon/aina.png";
+import { FaSearch } from 'react-icons/fa';
 import "./congeAdminPage.css"
 
 function CongeAdminPage() {
@@ -12,6 +13,10 @@ function CongeAdminPage() {
                 <div className="coucheGauche">
                     <div className="titreConge">
                         <p>Congées</p>
+                    </div>
+                    <div className="rechercherDiv">
+                        {/* <FaSearch className="search-icon" /> */}
+                        <input type="text" placeholder='Rechercher...'/>
                     </div>
                     <Link to={"/"}>
                         <div className="contenue">
@@ -35,7 +40,7 @@ function CongeAdminPage() {
                                     <hr className='hr' />
                                     <h1>2000/20/10 - 2000/20/10</h1>
                                     <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e</h2>
+                                    <h2>Mbola anao vacance kely lo e </h2>
                                 </div>
                             </div>
                             <div className="basConge">

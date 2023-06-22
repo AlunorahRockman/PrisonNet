@@ -6,6 +6,8 @@ import congeIcon from "../../Outils/icon/conge.ico";
 import prisonnierIcon from "../../Outils/icon/prisonier.ico";
 import celluleIcon from "../../Outils/icon/cellule.ico";
 import visiteurIcon from "../../Outils/icon/visiteur.ico";
+import incidentIcon from "../../Outils/icon/alert.ico";
+import visiteIcon from "../../Outils/icon/visite.ico";
 import infoIcon from "../../Outils/icon/info.ico";
 import axios from 'axios';
 import "./corpHome.css"
@@ -26,34 +28,46 @@ function CorpHome() {
                             <p>Alunorah Aina</p>
                         </div>
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/personnelPage"}>
                         <div className="contenue">
                             <img className='image' src={personnelIcon}/>
                             <p>Personnels</p>
                         </div>
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/congePage"}>
                         <div className="contenue">
                             <img className='image' src={congeIcon}/>
                             <p>Congées</p>
                         </div>
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/visitePage"}>
                         <div className="contenue">
-                            <img className='image' src={prisonnierIcon}/>
-                            <p>Prisonniers</p>
+                            <img className='image' src={visiteIcon}/>
+                            <p>Visites</p>
                         </div>
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/prisonniersPage"}>
+                        <div className="contenue">
+                            <img className='image' src={prisonnierIcon}/>
+                            <p>Détenus</p>
+                        </div>
+                    </Link>
+                    <Link to={"/cellulesPage"}>
                         <div className="contenue">
                             <img className='image' src={celluleIcon}/>
                             <p>Cellules</p>
                         </div>
                     </Link>
-                    <Link to={"/"}>
+                    <Link to={"/visiteursPage"}>
                         <div className="contenue">
                             <img className='image' src={visiteurIcon}/>
                             <p>Visiteurs</p>
+                        </div>
+                    </Link>
+                    <Link to={"/incidentPage"}>
+                        <div className="contenue">
+                            <img className='image' src={incidentIcon}/>
+                            <p>Incidents</p>
                         </div>
                     </Link>
                 </div>
@@ -75,7 +89,7 @@ function CorpHome() {
                                 <img className='imageGrang' src={congeIconN}/>
                             </div>
                             <div className="textBox">
-                                <h2>Congées</h2>
+                                <h2>Congées en cours</h2>
                                 <p>150</p>
                             </div>
                         </div>
@@ -84,7 +98,7 @@ function CorpHome() {
                                 <img className='imageGrang' src={prisonnierIconN}/>
                             </div>
                             <div className="textBox">
-                                <h2>Prisonniers</h2>
+                                <h2>Détenus</h2>
                                 <p>150</p>
                             </div>
                         </div>
@@ -113,7 +127,7 @@ function CorpHome() {
                                 <h2>Personnels</h2>
                             </div>
                             <div className="divLink">
-                                <Link>
+                                <Link to={'/personnelPage'}>
                                     <p>Afficher tous</p>
                                 </Link>
                             </div>
