@@ -1,0 +1,251 @@
+.messanger{
+    width: 100%;
+}
+.centralCenter .gaucheCentral{
+    width: 25%;
+    background: var(--dark1);
+    height: 100vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.centralCenter .central{
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--black);
+}
+.centralCenter .droitCentral{
+    width: 25%;
+    background: var(--dark1);
+    height: 100vh;
+}
+.couche .titreDiscusion{
+    margin-top: 75px;
+    padding-left: 30px;
+}
+.titreDiscusion p{
+    color: var(--white1);
+    font-size: var(--font4);
+}
+.inputRechercherDis{
+    display: flex;
+    justify-content: center;
+}
+.inputRechercherDis input{
+    width: 90%;
+    font-size: var(--font2);
+    border-radius: 10px;
+    height: 40px;
+    color:  var(--gray);
+    background: var(--dark2);
+    padding-left: 10px;
+    border: none;
+}
+
+.inputRechercherDis input:focus{
+    outline: none;
+}
+.couche .content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+.content .contenueUser{
+    display: flex;
+    align-items: center;
+    padding: 18px;
+    border-radius: 10px;
+    height: fit-content;
+    gap: 10px;
+    border: 0.1px solid var(--dark2);
+}
+.content .contenueUser:hover{
+    background: var(--dark2);
+}
+.contenueUser .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+}
+.image img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.contenueUser .titre{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+.titre .div{
+    text-align: left;
+}
+.titre .div h6{
+    color: var(--white);
+    font-size: var(--font2);
+    margin: 0;
+    padding-bottom: 2px;
+    text-align: left;
+}
+.titre .div p{
+    color: var(--gray);
+    font-size: 12px;
+    margin: 0;
+    text-align: left;
+}
+.central .topImage{
+    margin-top: 61px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--dark1);
+    padding: 0 20px 0 20px;
+    height: 70px;
+    border-bottom: 1px solid var(--dark3);
+}
+.topImage img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+.topImage p{
+    color: var(--white1);
+    font-size: var(--font2);
+    margin: 0;
+}
+.central .divFotter{
+    display: flex;
+    flex-direction: row;
+    background: var(--black);
+    padding: 0 5px 0 5px;
+    height: 70px;
+    border-bottom: 1px solid var(--dark2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.divFotter input{
+    width: 100%;
+    border-radius: 10px 0 0 10px;
+    height: 40px;
+    border: none;
+    padding-left: 10px;
+    color: var(--gray);
+    font-size: var(--font2);
+    background: var(--dark2);
+}
+
+.divFotter input{
+    outline: none;
+}
+.divFotter button{
+    border: none;
+    background: var(--dark2);
+    border-radius: 0 10px 10px 0;
+    height: 41px;
+    width: 41px;
+}
+.divFotter button:hover{
+    background: var(--dark1);
+}
+
+.droitCentral .droiteCover{
+    margin-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+}
+.droitCentral .droiteCover img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 1px solid var(--gray);
+}
+.droitCentral .nom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nom p{
+    color: var(--white1);
+    font-size: var(--font3);
+}
+.central .centralMessage{
+    height: 70%;
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 20px;
+    display: flex;
+    overflow-y: scroll;             
+    overflow-x: hidden;
+    padding: 10px;
+}
+.centralMessage .sender{
+    background: var(--orange);
+    border-radius: 20px;
+    border-radius: 0 20px 20px 20px;
+    padding-left:20px;
+    padding-top: 0.5px;
+    padding-bottom: 0.5px; 
+    padding-right: 20px;
+    height: auto;
+    color: var(--white);
+    max-width: 50%;
+    display: inline-block;
+    align-self: flex-end;
+}
+.centralMessage .recipient{
+    background: var(--dark3);
+    border-radius: 20px 20px 0 20px;
+    padding-left:20px;
+    padding-top: 0.5px;
+    padding-bottom: 0.5px;
+    padding-right: 20px;
+    height: auto;
+    color: var(--white);
+    max-width: 50%;
+    display: inline-block;
+    align-self: flex-start;
+}
+.sender p{
+    font-size: 13px;
+    text-align: left;
+    color: var(--black);
+}
+.sender h6{
+    font-size: 10px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    color: var(--dark);
+    padding-bottom: 10px;
+}
+.recipient p{
+    font-size: 13px;
+    text-align: left;
+}
+.recipient h6{
+    font-size: 10px;
+    margin: 0;
+    text-align: left;
+    padding: 0;
+    color: var(--gray);
+    padding-bottom: 10px;
+}
+
+.messanger .centralCenter{
+    width: 100%;
+    display: flex;
+}

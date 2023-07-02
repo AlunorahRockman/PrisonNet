@@ -6,9 +6,10 @@ import deconnecterIcon from "../../Outils/icon/logout.ico";
 import notificationIcon from "../../Outils/icon/notification.ico";
 import messengerIcon from "../../Outils/icon/messenger.ico";
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import "./navBar.css"
 
-function NavBar() {
+import "../NavBar/navBar.css"
+
+function NavBarMessage() {
     return (
         <div className='navContainer'>
             <div className="navCouche">
@@ -23,11 +24,11 @@ function NavBar() {
                     </div>
                 </div>
                 <div className="navDem">
-                    <Link to={'/messagePage'}>
+                    {/* <Link to={'/messagePage'}>
                         <div className="iconPrim">
                             <img src={messengerIcon} alt="message Icon" />
                         </div>
-                    </Link>
+                    </Link> */}
                     <Link to={'/notificationPage'}>
                         <div className="iconDem">
                             <img src={notificationIcon} alt="notification Icon" />
@@ -48,4 +49,4 @@ function NavBar() {
     )
 }
 
-export default NavBar
+export default NavBarMessage

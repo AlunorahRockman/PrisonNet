@@ -5,9 +5,10 @@ import retourIcon from "../../Outils/icon/retour.ico";
 import aina from "../../Outils/icon/aina.png";
 import { FaSearch } from 'react-icons/fa';
 
-import "./visiteursPageAdmin.css"
 
-function VisiteursPageAdmin() {
+import "./adminPage.css"
+
+function AdminPage() {
     return (
         <div className='corpsPersonnel'>
             <div className="gauchePers">
@@ -24,7 +25,7 @@ function VisiteursPageAdmin() {
                 <div className="basDroite">
                     <div className="topTable">
                         <div className="divTitre">
-                            <h2>Visiteurs</h2>
+                            <h2>Administrateurs</h2>
                         </div>
                         <div className="divInputRecherche">
                             <FaSearch className="search-icon" />
@@ -132,4 +133,4 @@ function VisiteursPageAdmin() {
     )
 }
 
-export default VisiteursPageAdmin
+export default AdminPage

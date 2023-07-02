@@ -8,6 +8,7 @@ import celluleIcon from "../../Outils/icon/cellule.ico";
 import visiteurIcon from "../../Outils/icon/visiteur.ico";
 import incidentIcon from "../../Outils/icon/alert.ico";
 import visiteIcon from "../../Outils/icon/visite.ico";
+import adminIcon from "../../Outils/icon/admin.ico";
 import infoIcon from "../../Outils/icon/info.ico";
 import axios from 'axios';
 import "./corpHome.css"
@@ -16,13 +17,14 @@ import congeIconN from "../../Outils/icon/congeN.ico";
 import prisonnierIconN from "../../Outils/icon/prisonierN.ico";
 import celluleIconN from "../../Outils/icon/celluleN.ico";
 import visiteurIconN from "../../Outils/icon/visiteurN.ico";
+import NotificationPage from '../NotificationPage/NotificationPage';
 
 function CorpHome() {
     return (
         <div className='corpHome'>
             <div className="gaucheHome">
                 <div className="coucheGauche">
-                    <Link to={"/"}>
+                    <Link to={"/comptePage"}>
                         <div className="contenue">
                             <img className='image' src={aina}/>
                             <p>Alunorah Aina</p>
@@ -68,6 +70,12 @@ function CorpHome() {
                         <div className="contenue">
                             <img className='image' src={incidentIcon}/>
                             <p>Incidents</p>
+                        </div>
+                    </Link>
+                    <Link to={"/adminPage"}>
+                        <div className="contenue">
+                            <img className='image' src={adminIcon}/>
+                            <p>Administrateurs</p>
                         </div>
                     </Link>
                 </div>

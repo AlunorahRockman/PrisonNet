@@ -18,7 +18,8 @@ function RegisterPage() {
         sexe: "",
         image: "user.jpg",
         typeCompte: "Visiteur",
-        estValide: "false"
+        estValide: "false",
+        estBloque: "false"
     })
 
     const [errors, setErrors] = useState([])
@@ -55,8 +56,6 @@ function RegisterPage() {
             }
         })
     }
-
-
 
     return (
         <div className='corpRegister'>

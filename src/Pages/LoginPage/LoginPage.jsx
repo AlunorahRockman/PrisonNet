@@ -43,7 +43,7 @@ const handleSubmit = (e) => {
       <div className="couche">
         <div className="presentation">
           <h1>PrisonNet</h1>
-          <p>Avec PrisonNet, vous pouvez rester en contact avec votre prisonnier.</p>
+          <p>Avec PrisonNet, vous pouvez rester en contact avec votre détenus.</p>
         </div>
         <div className="form">
           <div className="cover">
