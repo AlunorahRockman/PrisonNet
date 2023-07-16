@@ -1,0 +1,6 @@
+.textCongeM .motifI{
+    background: var(--dark);
+    height: 70%;
+    padding: 5px;
+    border-radius: 0 10px 10px 0;
+}

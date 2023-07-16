@@ -1,0 +1,8 @@
+.tdButton{
+    display: flex;
+    gap: 5px;
+}
+
+.divConfirmation{
+    color: var(--gray);
+}

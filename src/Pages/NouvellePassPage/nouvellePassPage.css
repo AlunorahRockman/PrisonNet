@@ -11,6 +11,11 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
 }
 
+.input-groupOublie{
+    display: flex;
+    flex-direction: column;
+}
+
 .input-groupOublie input {
     padding: 10px;
     border-radius: var(--radius1);
@@ -22,4 +27,19 @@
 }
 .input-groupOublie input:focus{
     outline: none;
+}
+
+.input-groupOublie label{
+    margin-left: 23%;
+}
+
+
+.divInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divInput .password-toggle{
+    margin-left: -35px;
 }

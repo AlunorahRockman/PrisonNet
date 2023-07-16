@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, {useState} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import errorIcon from "../../Outils/icon/error.ico";
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import "./nouvellePassPage.css"
 
 function NouvellePassPage() {
@@ -15,6 +16,18 @@ function NouvellePassPage() {
   })
 
   const [errors, setErrors] = useState([])
+  
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordToggle = () => {
+      setShowPassword(!showPassword);
+  };
+
+  const [showPassword1, setShowPassword1] = useState(false);
+
+  const handlePasswordToggle1 = () => {
+      setShowPassword1(!showPassword1);
+  };
 
   const navigate = useNavigate()
 
@@ -39,12 +52,23 @@ function NouvellePassPage() {
     <div className='corpValidation'>
         <div className="coucheValidationNouvelle">
             <h1>Nouveau mot de passe</h1>
+            <br />
             <form onSubmit={handleSubmit}>
                 <div class="input-groupOublie">
-                    <label for="nouveau">Entrer le nouveau mot de passe</label>
-                    <input type="password" id="nouveau" onChange={e => setValues({...values, nouveauPass: e.target.value})} name="nouveau"/>
-                    <label className='labelNouvelle' for="confirm">Veuillez le confirmer</label>
-                    <input type="password" onChange={e => setValues({...values, confirmPass: e.target.value})} id="confirm" name="confirm"/>
+                  <label for="nouveau">Entrer le nouveau mot de passe</label>
+                  <div className="divInput">
+                    <input type={showPassword ? 'text' : 'password'} id="nouveau" onChange={e => setValues({...values, nouveauPass: e.target.value})} name="nouveau"/>
+                    <div className="password-toggle" onClick={handlePasswordToggle}>
+                      {showPassword ? <FaEye/> : <FaEyeSlash/>}
+                    </div>
+                  </div>
+                  <label className='labelNouvelle' for="confirm">Veuillez le confirmer</label>
+                  <div className="divInput">
+                    <input type={showPassword1 ? 'text' : 'password'} onChange={e => setValues({...values, confirmPass: e.target.value})} id="confirm" name="confirm"/>
+                    <div className="password-toggle" onClick={handlePasswordToggle1}>
+                      {showPassword1 ? <FaEye/> : <FaEyeSlash/>}
+                    </div>
+                  </div>
                 </div>
                 <hr className='hr'/>
                 {

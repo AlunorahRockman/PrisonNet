@@ -5,8 +5,29 @@ import retourIcon from "../../Outils/icon/retour.ico";
 import aina from "../../Outils/icon/aina.png";
 import { FaSearch } from 'react-icons/fa';
 import "./congeAdminPage.css"
+import { useAuth } from '../../hooks/useAuth';
 
 function CongeAdminPage() {
+
+    const {user} = useAuth()
+    const [data, setData] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
+
+    const handleSearchChange = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+
+    useEffect(() => {
+        const fetchData=async ()=>{ 
+            let resultat = await axios.get(`http://localhost:5000/getAllConge`)
+            resultat = await resultat.data;
+            setData(resultat)
+        }
+        fetchData()
+    }, [])
+
     return (
         <div className='corpsPersonnel'>
             <div className="gauchePers">
@@ -15,8 +36,7 @@ function CongeAdminPage() {
                         <p>Congées</p>
                     </div>
                     <div className="rechercherDiv">
-                        {/* <FaSearch className="search-icon" /> */}
-                        <input type="text" placeholder='Rechercher...'/>
+                        <input type="text" value={searchValue} onChange={handleSearchChange} placeholder='Rechercher...'/>
                     </div>
                     <Link to={"/"}>
                         <div className="contenue">
@@ -28,125 +48,40 @@ function CongeAdminPage() {
             </div>
             <div className="droitePers">
                 <div className="coucheConge">
-                    <div className="contenueBox">
-                        <div className="coucheBox">
-                            <div className="topConge">
-                                <div className="photoConge">
-                                    <img src={aina}/>
-                                </div>
-                                <div className="textConge">
-                                    <p>Alunorah Aina</p>
-                                    <h1>Developpement</h1>
-                                    <hr className='hr' />
-                                    <h1>2000/20/10 - 2000/20/10</h1>
-                                    <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e </h2>
-                                </div>
-                            </div>
-                            <div className="basConge">
-                                <div className="coucheBtn">
-                                    <button className='acceptBtn'>Accépter</button>
-                                    <button className='reffusBtn'>Réffuser</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="contenueBox">
-                        <div className="coucheBox">
-                            <div className="topConge">
-                                <div className="photoConge">
-                                    <img src={aina}/>
-                                </div>
-                                <div className="textConge">
-                                    <p>Alunorah Aina</p>
-                                    <h1>Developpement</h1>
-                                    <hr className='hr' />
-                                    <h1>2000/20/10 - 2000/20/10</h1>
-                                    <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e</h2>
-                                </div>
-                            </div>
-                            <div className="basConge">
-                                <div className="coucheBtn">
-                                    <button className='acceptBtn'>Accépter</button>
-                                    <button className='reffusBtn'>Réffuser</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {
+                        data
+                        .filter(item =>
+                            Object.values(item).some(value =>
+                            String(value).toLowerCase().includes(searchValue.toLowerCase())
+                            )
+                        ).map((item) =>                 
 
-                    <div className="contenueBox">
-                        <div className="coucheBox">
-                            <div className="topConge">
-                                <div className="photoConge">
-                                    <img src={aina}/>
+                        <div className="contenueBoxD">
+                            <div className="coucheBox">
+                                <div className="topConge">
+                                    <div className="photoConge">
+                                        <img className='image' src={`http://localhost:5000/images/${user.image}`}/>
+                                    </div>
+                                    <div className="textConge">
+                                        <p>Nom d'utilisateur</p>
+                                        <h1>Poste de l'utilisateur</h1>
+                                        <hr className='hr' />
+                                        <h1>{item.date.substring(0, 10)} - {item.dateFin.substring(0, 10)}</h1>
+                                        <hr className='hr' />
+                                        <h2>{item.motif}</h2>
+                                    </div>
                                 </div>
-                                <div className="textConge">
-                                    <p>Alunorah Aina</p>
-                                    <h1>Developpement</h1>
-                                    <hr className='hr' />
-                                    <h1>2000/20/10 - 2000/20/10</h1>
-                                    <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e</h2>
-                                </div>
-                            </div>
-                            <div className="basConge">
-                                <div className="coucheBtn">
-                                    <button className='acceptBtn'>Accépter</button>
-                                    <button className='reffusBtn'>Réffuser</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="contenueBox">
-                        <div className="coucheBox">
-                            <div className="topConge">
-                                <div className="photoConge">
-                                    <img src={aina}/>
-                                </div>
-                                <div className="textConge">
-                                    <p>Alunorah Aina</p>
-                                    <h1>Developpement</h1>
-                                    <hr className='hr' />
-                                    <h1>2000/20/10 - 2000/20/10</h1>
-                                    <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e</h2>
-                                </div>
-                            </div>
-                            <div className="basConge">
-                                <div className="coucheBtn">
-                                    <button className='acceptBtn'>Accépter</button>
-                                    <button className='reffusBtn'>Réffuser</button>
+                                <div className="basConge">
+                                    <div className="coucheBtn">
+                                        <button className='acceptBtn'>Accépter</button>
+                                        <button className='reffusBtn'>Réffuser</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="contenueBox">
-                        <div className="coucheBox">
-                            <div className="topConge">
-                                <div className="photoConge">
-                                    <img src={aina}/>
-                                </div>
-                                <div className="textConge">
-                                    <p>Alunorah Aina</p>
-                                    <h1>Developpement</h1>
-                                    <hr className='hr' />
-                                    <h1>2000/20/10 - 2000/20/10</h1>
-                                    <hr className='hr' />
-                                    <h2>Mbola anao vacance kely lo e</h2>
-                                </div>
-                            </div>
-                            <div className="basConge">
-                                <div className="coucheBtn">
-                                    <button className='acceptBtn'>Accépter</button>
-                                    <button className='reffusBtn'>Réffuser</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    )
+                }
 
                 </div>
             </div>

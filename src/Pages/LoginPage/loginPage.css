@@ -33,6 +33,14 @@
     object-position: center;
 }
 
+.password-toggle{
+    color: var(--gray);
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .errorText{
     display: flex;
     justify-content: center;

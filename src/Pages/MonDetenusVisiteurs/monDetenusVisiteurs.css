@@ -1,0 +1,21 @@
+.inputModal .label{
+    margin-bottom: 5px;
+}
+
+.inputModal .input{
+    margin-bottom: -15px;
+}
+
+
+.modal-contentt{
+    background: var(--dark);
+    border: 0.1px solid var(--dark3);
+    border-radius: 10px;
+    width: 40%;
+    padding: 20px;
+}
+
+.modal-contentt p{
+    color: var(--orange);
+}
+

@@ -208,7 +208,7 @@
 }
 .centralMessage .recipient{
     background: var(--dark3);
-    border-radius: 20px 20px 0 20px;
+    border-radius: 20px 0 20px 20px;
     padding-left:20px;
     padding-top: 0.5px;
     padding-bottom: 0.5px;
@@ -248,4 +248,8 @@
 .messanger .centralCenter{
     width: 100%;
     display: flex;
+}
+
+.selected {
+    background-color: var(--dark2);
 }

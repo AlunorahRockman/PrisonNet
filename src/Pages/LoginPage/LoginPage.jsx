@@ -6,6 +6,7 @@ import errorIcon from "../../Outils/icon/error.ico";
 import { Link, Navigate, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import jwtDecode from 'jwt-decode';
 
 function LoginPage() {
@@ -14,6 +15,12 @@ const [values, setValues] = useState({
     email: "",
     motdepasse: ""
 })
+
+const [showPassword, setShowPassword] = useState(false);
+
+const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+};
 
 const [errors, setErrors] = useState([])
 
@@ -66,7 +73,10 @@ const handleSubmit = (e) => {
                     <img src={passwdIcon} alt="password" />
                   </div>
                   <div className="text">
-                    <input className='inpute' type="password" onChange={e => setValues({...values, motdepasse: e.target.value})} placeholder='mot de passe...' />
+                    <input className='inpute' type={showPassword ? 'text' : 'password'} onChange={e => setValues({...values, motdepasse: e.target.value})} placeholder='mot de passe...' />
+                  </div>
+                  <div className="password-toggle" onClick={handlePasswordToggle}>
+                      {showPassword ? <FaEye/> : <FaEyeSlash/>}
                   </div>
                 </div>
               </div>

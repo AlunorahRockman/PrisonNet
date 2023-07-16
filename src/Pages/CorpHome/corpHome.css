@@ -17,6 +17,9 @@
     height: 100vh;
 }
 
+.tdPhone{
+    width: 13%;
+}
 .coucheGauche{
     display: flex;
     flex-direction: column;
@@ -182,14 +185,16 @@
 .topTable a p{
     padding: 7px 10px 7px 10px;
     margin: 0;
-    color: var(--black);
-    background: var(--orange);
+    color: var(--orange);
+    background: none;
     border-radius: 5px;
     font-size: var(--font2);
+    border: 0.1px solid var(--orange);
 }
 
 .topTable a p:hover{
-    background: var(--orange1);
+    background: var(--orange);
+    color: var(--white);
 }
 
 .tablePers{
@@ -197,18 +202,18 @@
     height: 90%;
 }
 
+.gauche{
+    width: 90%;
+}
+.droite{
+    width: 10%;
+}
+
 .tablePers table {
     width: 100%;
     border-collapse: collapse;
 }
-.tablePers table thead tr td {
-    /* font-weight: 600; */
-    color: var(--white);
-    font-size: var(--font3);
-}
-/* .tablePers table tr:first-child {
-    border-top: 1px solid var(--dark3);
-} */
+
 
 .tablePers table tr {
     color: var(--gray);
@@ -224,43 +229,333 @@
 .tablePers table tr td {
     padding: 10px;
 }
+.tablePers table thead tr td{
+    font-size: var(--font2);
+}
 .tablePers table tr td:last-child {
     text-align: end;
     border-top-right-radius: 10px;
-    border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 2px;
 }
 .tablePers table tr td:first-child {
     border-bottom-left-radius: 10px;
-    border-top-left-radius: 5px;
+    border-top-left-radius: 2px;
     width: 40px;
 }
 .tablePers table tr td:nth-child(2) {
     text-align: center;
-    width: 20%;
+    width: 15%;
 }
 .tablePers table tr td:nth-child(3) {
     text-align: center;
     width: 10px;
 }
-/* .tablePers table tr td:nth-child(5) {
-    width: 60%;
-} */
+
+.tablePers table tr:hover td .btnKely{
+    border: 0.1px solid var(--white);
+}
+
+.tablePers table tr td .btnKely:hover{
+    border: 0.1px solid var(--black);
+}
 
 .tablePers table tbody tr td{
     font-size: var(--font2);
 }
 
 .tablePers table tbody tr td img {
-    position: relative;
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
-.tablePers table tbody tr td img:hover {
-    /* width: 120px;
-    height: 120px;
-    border: 2px solid var(--orange);
-    position: absolute;
-    margin-left: -40px;
-    z-index: 1; */
+
+.coucheDroiteConge{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.coverDroit{
+    width: 100%;
+    min-height: 100vh;
+    background: var(--dark);
+    border-radius: 10px;
+}
+.contentConge{
+    margin-right: 10px;
+    margin-left: 10px;
+    background: var(--dark2);
+    border-radius: 10px;
+    display: flex;
+    height: 130px;
+    border: 0.1px solid var(--dark2);
+    box-shadow: 2px 7px 40px 2px var(--dark1)
+}
+.divTete{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--orange);
+    margin-bottom: 10px;
+}
+.contentConge:hover{
+    background: var(--dark2);
+}
+
+.gauche .imageC{
+    width: 17%;
+}
+.contentConge .gauche .imageC img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.contentConge .droite{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.divEtat{
+    background: var(--dark);
+    border: 1px solid var(--orange);
+    color: var(--orange);
+    border-radius: 0 0 10px 0;
+    height: 70%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.droite .divModify{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: 30px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.contentConge .gauche{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.textCongee span{
+    text-decoration: underline;
+    font-style: normal;
+    color: var(--gray);
+}
+.rechercheDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.droite a{
+    text-decoration: none;
+}
+
+
+.droite .divModify:hover{
+    background: var(--dark1);
+}
+
+.divModify div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray);
+}
+
+.divModify div img{
+    width: 20px;
+    height: 20px;
+}
+
+.rechercheDiv .divInput{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rechercheDiv .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 1px;
+}
+
+.divContenue{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.titre p{
+    color: var(--orange);
+    margin-left: 10px;
+    font-size: var(--font3);
+}
+
+.divInput input{
+    background: none;
+    border: none;
+    height: 30px;
+    border-radius: 5px;
+    color: var(--gray);
+    font-size: var(--font2);
+}
+
+.divInput input:focus{
+    outline: none;
+}
+
+.textCongeM{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.textCongeM .top{
+    height: 30%;
+    border-radius: 0;
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    align-items: center;
+    padding: 5px;
+}
+
+.textCongeM .top div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textCongeM .top .menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.textCongeM .top .menu:hover{
+    background: var(--dark);
+}
+
+.textCongeM .top .menu p{
+    color: var(--gray);
+    padding: 10px 8px 10px 10px;
+    margin-top: -10px;
+    margin-left: 1px;
+    margin-right: 5px;
+    margin-bottom: 0;
+}
+
+
+.textCongeM .motif{
+    background: var(--dark1);
+    display: flex;
+    justify-content: center;
+    height: 70%;
+    align-items: center;
+    border-radius: 0 0 10px 0;
+    padding: 5px;
+    color: var(--dark3);
+}
+
+.textCongeM .motif p{
+    font-size: var(--font3);
+}
+
+.espace{
+    margin-left: 5%;
+}
+
+
+
+.textCongee{
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+}
+
+.textCongee .top{
+    height: 30%;
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+
+
+.textCongee .motif{
+    background: var(--dark);
+    height: 70%;
+    border-radius: 0;
+    padding: 5px;
+}
+
+.textCongee h5{
+    font-size: var(--font2);
+    color: var(--gray);
+    font-style: normal;
+    text-align: left;
+    margin: 1px;
+    width: 100%;
+}
+
+.textCongee h3{
+    font-size: var(--font2);
+    color: var(--gray);
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.menu-overlay {
+    border-radius: 5px;
+}
+
+.menu-container{
+    display: flex;
+    align-items: center;    
+    gap: 10px;
+    justify-content: center;
+    width: 55px;
+}
+.menu-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: grey;
+    text-decoration: none;
+    width: 50%;
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0.1px solid var(--gray);
+}
+
+.menu-option:hover{
+    background: var(--dark);
+}
+
+
+
+
+
+

@@ -13,18 +13,16 @@
 }
 
 .search-icon {
-    z-index: 1;
     color: var(--orange);
-    margin-right: -30px;
+    margin-right: 5px;
 }
 
 .divInputRecherche input{
-    background: var(--dark2);
+    background: var(--dark1);
     border: none;
     color: var(--gray);
-    border-radius: 10px;
-    padding-left: 40px;
-    height: 40px;
+    padding-left: 10px;
+    height: 30px;
 }
 
 .divInputRecherche input:focus{
@@ -75,6 +73,77 @@
     cursor: pointer;
 }
 
+.trBtn{
+    padding: 11px;
+}
+
+.trBtn a{
+    text-decoration: none;
+}
+.addBtn .icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.addBtn .icon img{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.addBtnc .icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.addBtnc .icon img{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.addBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    gap: 5px;
+    width: 100%;
+    background: none;
+    color: var(--gray);
+    border: 0.1px dotted var(--gray);
+    border-radius: 10px;
+    height: 55px;
+}
+
+.addBtn:hover{
+    background: var(--dark2);
+}
+
+.addBtnc{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20px;
+    gap: 5px;
+    width: 100%;
+    background: none;
+    color: var(--gray);
+    border: 0.1px dotted var(--gray);
+    border-radius: 10px;
+    height: 47px;
+}
+
+.addBtnc:hover{
+    background: var(--dark2);
+}
 
 
 

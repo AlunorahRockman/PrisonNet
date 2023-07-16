@@ -40,3 +40,20 @@
     color: var(--orange1);
     text-decoration: underline;
 }
+
+.coucheConge a{
+    width: 22%;
+}
+
+a .contenueAdd{
+    border: 1px dashed var(--gray);
+    height: 300px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a .contenueAdd:hover{
+    background: var(--dark2);
+}

@@ -6,8 +6,30 @@ import aina from "../../Outils/icon/aina.png";
 
 import "./incidentsAdminPage.css"
 
+import { useAuth } from '../../hooks/useAuth';
+
 
 function IncidentsAdminPage() {
+
+
+    const {user} = useAuth()
+    const [data, setData] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+
+
+    const handleSearchChange = (event) => {
+        setSearchValue(event.target.value);
+    };
+
+
+    useEffect(() => {
+        const fetchData=async ()=>{ 
+            let resultat = await axios.get(`http://localhost:5000/getAllIncident`)
+            resultat = await resultat.data;
+            setData(resultat)
+        }
+        fetchData()
+    }, [])
     return (
 
 
@@ -15,10 +37,10 @@ function IncidentsAdminPage() {
             <div className="gauchePrisonnier">
                 <div className="coucheGauche">
                     <div className="titreConge">
-                        <p>Détenus</p>
+                        <p>Incidents</p>
                     </div>
                     <div className="rechercherDiv">
-                        <input type="text" placeholder='Rechercher...'/>
+                        <input value={searchValue} onChange={handleSearchChange} type="text" placeholder='Rechercher...'/>
                     </div>
                     <Link to={"/"}>
                         <div className="contenue">
@@ -33,113 +55,29 @@ function IncidentsAdminPage() {
 
                     <div>
                         <ul className="incident-list">
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
 
 
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
+                        {
+                            data
+                            .filter(item =>
+                                Object.values(item).some(value =>
+                                String(value).toLowerCase().includes(searchValue.toLowerCase())
+                                )
+                            ).map((item) =>                 
+                                <li>
+                                    <div className="imageIncidentsListe">
+                                        <img className='personnel-image' src={`http://localhost:5000/images/${user.image}`}/>
+                                    </div>
+                                    <div className="textIncidents">
+                                        <h5>Nom de l'utilisateur</h5>
+                                        <p className='motifIncidents'>{item.description}</p>
+                                        <span>Date: {item.date.substring(0, 10)}</span>
+                                        <span>Nom de la détenus concerné: <Link>Nom de la détenus</Link></span>
+                                    </div>
+                                </li>
+                            )
+                        }
 
-
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
-
-
-                            <li>
-                                <div className="imageIncidentsListe">
-                                    <img className="personnel-image" src={aina}/>
-                                </div>
-                                <div className="textIncidents">
-                                    <h5>Alunorah Aina</h5>
-                                    <p>Le gardien Smith a été accusé d'abus de 
-                                        pouvoir envers le détenu Johnson lors de 
-                                        la ronde de nuit. Le détenu prétend avoir
-                                        été physiquement agressé sans provocation.</p>
-                                    <span>Date: 2023-06-10 23:45:00</span>
-                                    <span>Nom de la détenus concerné: <Link>Alunorah Aina</Link></span>
-                                </div>
-                            </li>
 
                         </ul>
                     </div>
