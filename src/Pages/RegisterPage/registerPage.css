@@ -28,11 +28,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: -20px;
     width: 100%;
 }
 .password-input .password-toggle{
     background: var(--dark0);
-    height: var(--hauteur3);
+    height: 57px;
     color: var(--orange);
     display: flex;
     align-items: center;
@@ -40,48 +41,56 @@
     border-radius: var(--radius) 0 0 var(--radius);
     padding-left: 10px;
     padding-right: 10px;
-    border-top: 1px solid var(--orange);
-    border-left: 1px solid var(--orange);
-    border-bottom: 1px solid var(--orange);
+    border-top: 1px solid var(--gray);
+    border-left: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
 }
 .inputInterneMotdepasse{
     width: 100%;
-    height: var(--hauteur2);
-    font-size: var(--font4);
+    height: var(--hauteur1);
+    font-size: var(--font2);
     background: var(--dark0);
     color: var(--white1);
     border-radius: 0 var(--radius) var(--radius) 0;
     border: none;
+    margin-left: -10px;
     padding-left: 10px;
     padding-right: 10px;
 }
 .inputInterneMotdepasse:focus{
     outline: none;
-    border-top: 1px solid var(--orange);
-    border-right: 1px solid var(--orange);
-    border-bottom: 1px solid var(--orange);
+    border-top: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
+    border-bottom: 1px solid var(--gray);
 }
 .titreRegister p{
     color: var(--orange);
     width: 100%;
-    text-align: left;
-    font-size: var(--font6);
-    margin: 0;
+    text-align: center;
+    font-size: var(--font5);
+    padding-bottom: 0;
+    margin-bottom: -10px;
 }
 .buttonReg{
     background: var(--orange);
     color: var(--white);
     height: var(--hauteur1);
     border: none;
-    font-size: var(--font5);
-    border-radius: var(--radius1) var(--radius) var(--radius1) var(--radius);
-    width: 40%;
+    font-size: var(--font3);
+    border-radius: 10px;
+    width: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-top: 10px;
+    margin-bottom: 10%;
 }
 .verConnexion{
     width: 100%;
     display: flex;
     justify-content: left;
+    height: var(--hauteur1);
+    font-size: var(--font2);
+    border: 1px solid var(--dark);
     align-items: center;
     border-radius: var(--radius);
 }
@@ -110,12 +119,15 @@
     padding-top: 2%;
     padding-left: 5%;
     padding-right: 5%;
+    /* background-image: url("../../Outils/icon/fondIncription.jpg");
+    background-color: rgba(15, 8, 8, 0.5); */
 }
 .coucheDroit{
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-bottom: 5%;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 .inputRegister{
     width: 100%;
@@ -127,8 +139,8 @@
 }
 .inputInterne{
     width: 100%;
-    height: var(--hauteur2);
-    font-size: var(--font4);
+    height: var(--hauteur1);
+    font-size: var(--font3);
     background: var(--dark0);
     color: var(--white1);
     border-radius: var(--radius);
@@ -145,6 +157,8 @@
     color: var(--gray);
     width: 100%;
     text-align: left;
+    font-size: var(--font2);
+    color: var(--orange);
 }
 
 

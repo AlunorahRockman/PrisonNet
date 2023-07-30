@@ -58,14 +58,16 @@ function PrisonniersPage() {
                                     <img src={`http://localhost:5000/images/${item.image}`}/>
                                 </div>
                                 <div className="titrePrisonnier">
-                                    <p>{item.nom}</p>
-                                    <h5>{item.dateVenue.substring(0, 10)}</h5>
+                                    <div className="divHorizontal">
+                                        <p>{item.nom}</p>
+                                        <h5>{item.dateVenue.substring(0, 10)}</h5>
+                                    </div>
                                     <hr className='hr' />
                                     <h6>{item.adresse}</h6>
                                 </div>
                                 <div className="buttonPrisonnier">
                                     <Link to={`/detailsDetenus/${item.id}`}>
-                                        <button className='buttonIray'>Afficher les details</button>
+                                        <button className='buttonIray'>Voir profil</button>
                                     </Link>
                                 </div>
                             </div>

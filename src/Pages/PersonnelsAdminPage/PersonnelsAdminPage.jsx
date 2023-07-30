@@ -26,6 +26,8 @@ function PersonnelsAdminPage() {
         fetchData()
     }, [])
 
+    console.log(data)
+
     
 
     return (
@@ -64,6 +66,8 @@ function PersonnelsAdminPage() {
                                     <td>Date de naissance</td>
                                     <td>Sexe</td>
                                     <td>Téléphone</td>
+                                    <td>Departement</td>
+                                    <td>Poste</td>
                                     <td>Actions</td>
                                 </tr>
                             </thead>
@@ -74,19 +78,24 @@ function PersonnelsAdminPage() {
                                     .filter(item =>
                                         Object.values(item).some(value =>
                                         String(value).toLowerCase().includes(searchValue.toLowerCase())
+                                        ) ||
+                                        Object.values(item.user).some(userValue =>
+                                        String(userValue).toLowerCase().includes(searchValue.toLowerCase())
                                         )
                                     ).map((item, index) => 
                                     <tr key = {index}>
-                                        <td><img src={`http://localhost:5000/images/${item.image}`}/></td>
-                                        <td>{item.nom}</td>
-                                        <td>{item.prenom}</td>
-                                        <td>{item.adresse}</td>
-                                        <td>{item.email}</td>
-                                        <td>{item.dateNaissance.substring(0, 10)}</td>
-                                        <td>{item.sexe}</td>
-                                        <td>{item.phone}</td>
+                                        <td><img src={`http://localhost:5000/images/${item.user.image}`}/></td>
+                                        <td>{item.user.nom}</td>
+                                        <td>{item.user.prenom}</td>
+                                        <td>{item.user.adresse}</td>
+                                        <td>{item.user.email}</td>
+                                        <td>{item.user.dateNaissance.substring(0, 10)}</td>
+                                        <td>{item.user.sexe}</td>
+                                        <td>{item.user.phone}</td>
+                                        <td>{item.departement}</td>
+                                        <td>{item.poste}</td>
                                         <td>
-                                            <Link to={`/afficherPersonnels/${item.id}`}>
+                                            <Link to={`/afficherPersonnels/${item.user.id}`}>
                                                 <button className='btnKely'>Afficher</button>
                                             </Link>
                                         </td>       

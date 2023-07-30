@@ -59,14 +59,23 @@
     margin: 0;
     padding: 10px;
     color: var(--orange);
+    font-size: var(--font2);
 }
 .titrePrisonnier h5{
-    margin: 0;
     padding-left: 10px;
     padding-top: 0;
     padding-bottom: 0;
     padding-right: 0;
+    font-size: var(--font1);
+    margin-right: 10px;
     color: var(--gray);
+
+}
+.divHorizontal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -10px;
 }
 .titrePrisonnier h6{
     margin: 0;
@@ -75,6 +84,7 @@
     padding-bottom: 0;
     padding-right: 0;
     color: var(--gray);
+    font-size: var(--font1);
 }
 .buttonPrisonnier{
     height: 15%;
@@ -95,13 +105,13 @@
     border: none;
     border-radius: 5px;
     color: var(--white);
+    font-size: var(--font2);
     height: 40px;
     width: 90%;
 }
 
 .buttonIray:hover{
     background: var(--orange1);
-    color: var(--black);
 }
 
 .rechercherDiv{

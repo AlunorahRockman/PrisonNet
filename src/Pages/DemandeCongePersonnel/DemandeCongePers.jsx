@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import errorIcon from "../../Outils/icon/error.ico";
 import axios from 'axios';
@@ -8,18 +8,45 @@ import "./demandeConge.css"
 function DemandeCongePers() {
 
     const [errors, setErrors] = useState([]);
+    const [idPers, setIdPers] = useState(0);
+
     const navigate = useNavigate();
 
     const {user} = useAuth();
 
+    useEffect(() => {
+        const fetchdata = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/getIdPersonnel/${user.id}`);
+                const id = response.data.id;
+                setIdPers(id);
+            } catch (error) {
+                console.error(error);
+            }
+    };
+        fetchdata();
+    }, []);
+
+    console.log(idPers)
+
     
     const [values, setValues] = useState({
-        idPersonnel: user.id,
+        personnelId: "",
         date: "",
         dateFin: "",
         motif: "",
         status: 0
     });
+
+    useEffect(() => {
+        if (idPers !== null) {
+            setValues((prevState) => ({
+                ...prevState,
+                personnelId: idPers,
+            }));
+        }
+    }, [idPers]);
+    console.log(values)
 
 
     const handleSubmit = (e) => {
@@ -36,6 +63,8 @@ function DemandeCongePers() {
             }
         });
     };
+
+
 
     return (
         <div className="containerAddPers">

@@ -2,8 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import retourIcon from "../../Outils/icon/retour.ico";
-import addPersIcon from "../../Outils/icon/addPers.ico";
-import aina from "../../Outils/icon/aina.png";
 import errorIcon from "../../Outils/icon/error.ico";
 import { useAuth } from '../../hooks/useAuth';
 import { FaSearch } from 'react-icons/fa';
@@ -16,6 +14,7 @@ function ListeDetenusVisiteur() {
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [selectedItemIdPrendre, setSelectedItemIdPrendre] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [idVis, setIdVis] = useState(null);
     const navigate = useNavigate();
     
     const {user} = useAuth()
@@ -25,11 +24,22 @@ function ListeDetenusVisiteur() {
     };
 
 
+    useEffect(() => {
+        const fetchdata = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getIdVisiteur/${user.id}`);
+            resultat = await resultat.data;
+            setIdVis(resultat); 
+            setValuesPrendre({ ...valuesPrendre, visiteurId: resultat });
+        };
+        fetchdata();
+    }, [user.id]);
+
+
     const handleModalOpen = (itemId) => {
         setSelectedItemId(itemId);
         setValues({
             ...values,
-            idDetenus: itemId
+            detenuId: itemId
         });
         console.log(itemId);
     };
@@ -39,22 +49,22 @@ function ListeDetenusVisiteur() {
         setSelectedItemIdPrendre(itemId);
         setValuesPrendre({
             ...valuesPrendre,
-            idDetenus: itemId
+            detenuId: itemId
         });
     };
 
     const [valuesPrendre, setValuesPrendre] = useState({
-        idVisiteur: user.id,
-        idDetenus: null,
+        visiteurId: idVis,
+        detenuId: null,
     });
 
 
     const [values, setValues] = useState({
-        idDetenus: null,
-        idPersonnel: user.id,
+        detenuId: null,
+        userId: user.id,
         description: "",
         date: "",
-        statut: 0
+        statut: 1
     });
 
 
@@ -71,7 +81,7 @@ function ListeDetenusVisiteur() {
         axios.post('http://localhost:5000/createOneIncident', values)
         .then(res => {
             console.log(res.data);
-            navigate('/listeIncidentsVisiteurs');
+            navigate('/listeIncidents');
         })
         .catch(err => {
             console.log(err);

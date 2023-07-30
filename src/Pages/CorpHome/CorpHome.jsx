@@ -27,8 +27,12 @@ import { useAuth } from '../../hooks/useAuth';
 import { FaSearch } from 'react-icons/fa';
 
 function CorpHome() {
+    const {user}=useAuth()
 
     const [data, setData] = useState([]);
+    const [idPers, setIdPers] = useState(null)
+    const [idVis, setIdVis] = useState(null)
+    const [dataUser, setDataUser] = useState([])
     const [visiteursCount, setVisiteursCount] = useState(0);
     const [personnelsCount, setPersonnelsCount] = useState(0);
     const [congeEnCoursCount, setEnCoursCount] = useState(0);
@@ -42,7 +46,6 @@ function CorpHome() {
     
 
     const navigate = useNavigate();
-    const [dataConge, setDataConge] = useState([]);
     const [searchValueConge, setSearchValueConge] = useState('');
 
     const [dataVisite, setDataVisite] = useState([]);
@@ -56,26 +59,81 @@ function CorpHome() {
         setSearchValueVisite(event.target.value);
     };
 
+    const [dataConge, setDataConge] = useState([]);
+
     useEffect(() => {
-        const fetchData = async () => {
-            let resultat = await axios.get(`http://localhost:5000/getCongeByOneUser/${user.id}`);
+        const fetchdata = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getIdPers/${user.id}`);
+            resultat = await resultat.data;
+            setIdPers(resultat); 
+        };
+        fetchdata();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const resultat = await axios.get(`http://localhost:5000/getIdVisiteur/${user.id}`);
+            const idVisiteur = resultat.data;
+            setIdVis(idVisiteur);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    console.log(idVis)
+    
+    useEffect(() => {
+        fetchData();
+    }, [user.id]);
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getPersonnelCongeByUser/${idPers}`);
             resultat = await resultat.data;
             setDataConge(resultat);
         };
-        fetchData();
+        fetchdata();
     }, []);
 
-    
+    console.log(dataConge)
+
     useEffect(() => {
         const fetchData = async () => {
-            let resultat = await axios.get(`http://localhost:5000/getVisiteByOneUser/${user.id}`);
+            if (idPers) {
+                let resultat = await axios.get(`http://localhost:5000/getPersonnelCongeByUser/${idPers}`);
+                resultat = await resultat.data;
+                setDataConge(resultat);
+            }
+        };
+        fetchData();
+    }, [idPers]);
+
+    useEffect(() => {
+        const fetchMonDetenus = async () => {
+            try {
+                if (idVis) {
+                    const resultat = await axios.get(`http://localhost:5000/getMonVisite/${idVis}`);
+                    setDataVisite(resultat.data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        fetchMonDetenus();
+    }, [idVis]);
+
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getOneUsers/${user.id}`);
             resultat = await resultat.data;
-            setDataVisite(resultat);
+            setDataUser(resultat);
         };
         fetchData();
     }, []);
-
-    const {user}=useAuth()
 
     useEffect(() => {
     const fetchVisiteursCount = async () => {
@@ -146,7 +204,7 @@ function CorpHome() {
 
     useEffect(() => {
         const fetchData=async ()=>{ 
-            let resultat = await axios.get(`http://localhost:5000/personnels`)
+            let resultat = await axios.get(`http://localhost:5000/personnelsSix`)
             resultat = await resultat.data;
             setData(resultat)
         }
@@ -154,7 +212,7 @@ function CorpHome() {
     }, [])
 
     const handleDeleteConge = (idConge) => {
-        const conge = dataConge.find(item => item.id === idConge);
+        const conge = dataConge ?.find(item => item.id === idConge);
         setSelectedConge(conge);
         setShowConfirmation(true);
     };
@@ -201,8 +259,8 @@ function CorpHome() {
                     <div className="coucheGauche">
                         <Link to={"/comptePage"}>
                             <div className="contenue">
-                                <img className='image' src={`http://localhost:5000/images/${user.image}`}/>
-                                <p>{user.nom}</p>
+                                <img className='image' src={`http://localhost:5000/images/${dataUser.image}`}/>
+                                <p>{dataUser.nom}</p>
                             </div>
                         </Link>
                         <Link to={"/personnelPage"}>
@@ -217,12 +275,6 @@ function CorpHome() {
                                 <p>Congées</p>
                             </div>
                         </Link>
-                        <Link to={"/visitePage"}>
-                            <div className="contenue">
-                                <img className='image' src={visiteIcon}/>
-                                <p>Visites</p>
-                            </div>
-                        </Link>
                         <Link to={"/prisonniersPage"}>
                             <div className="contenue">
                                 <img className='image' src={prisonnierIcon}/>
@@ -233,6 +285,12 @@ function CorpHome() {
                             <div className="contenue">
                                 <img className='image' src={celluleIcon}/>
                                 <p>Cellules</p>
+                            </div>
+                        </Link>
+                        <Link to={"/visitePage"}>
+                            <div className="contenue">
+                                <img className='image' src={visiteIcon}/>
+                                <p>Visites</p>
                             </div>
                         </Link>
                         <Link to={"/visiteursPage"}>
@@ -324,8 +382,8 @@ function CorpHome() {
                                             <td>Prénom</td>
                                             <td>Adresse</td>
                                             <td>Email</td>
-                                            <td>Date de naissance</td>
-                                            <td>Sexe</td>
+                                            <td>Departement</td>
+                                            <td>Poste</td>
                                             <td>Téléphone</td>
                                         </tr>
                                     </thead>
@@ -333,14 +391,14 @@ function CorpHome() {
                                         {
                                             data.map((item, index) => 
                                             <tr key={index}>
-                                                <td><img src={`http://localhost:5000/images/${item.image}`}/></td>
-                                                <td>{item.nom}</td>
-                                                <td>{item.prenom}</td>
-                                                <td>{item.adresse}</td>
-                                                <td>{item.email}</td>
-                                                <td>{item.dateNaissance.substring(0, 10)}</td>
-                                                <td>{item.sexe}</td>
-                                                <td className='tdPhone'>{item.phone}</td>    
+                                                <td><img src={`http://localhost:5000/images/${item.user.image}`}/></td>
+                                                <td>{item.user.nom}</td>
+                                                <td>{item.user.prenom}</td>
+                                                <td>{item.user.adresse}</td>
+                                                <td>{item.user.email}</td>
+                                                <td>{item.departement}</td>
+                                                <td>{item.poste}</td>
+                                                <td className='tdPhone'>{item.user.phone}</td>    
                                             </tr>
                                             )
                                         }
@@ -360,8 +418,8 @@ function CorpHome() {
                     <div className="coucheGauche">
                         <Link to={"/comptePage"}>
                             <div className="contenue">
-                                <img className='image' src={`http://localhost:5000/images/${user.image}`}/>
-                                <p>{user.nom}</p>
+                                <img className='image' src={`http://localhost:5000/images/${dataUser.image}`}/>
+                                <p>{dataUser.nom}</p>
                             </div>
                         </Link>
                         <Link to={"/tousLesDetenus"}>
@@ -418,7 +476,7 @@ function CorpHome() {
                                                     <div className="textCongee">
                                                         <div className='top'>
                                                             <h5><span>Date :</span> {item.dateVisite.substring(0, 10)} <span 
-                                                        className='espace'>Heure : </span> {item.heure} h</h5>
+                                                        className='espace'>Heure :</span> à {item.heure} h</h5>
                                                         </div>
                                                         <div className='motif'>
                                                             <h5><span>Description: </span></h5>
@@ -449,9 +507,21 @@ function CorpHome() {
                                                             <p>...</p>
                                                         </div>
                                                     </div>
-                                                    <div className="motif">
-                                                        <p>En attente</p>
-                                                    </div>
+                                                    {
+                                                        item.statut === 2 ? (
+                                                            <div className="motifReff">
+                                                                <p>REFFUSE</p>
+                                                            </div>
+                                                        ) : item.statut === 1 ? (
+                                                            <div className="motifAcc">
+                                                                <p>ACCEPTE</p>
+                                                            </div>
+                                                        ) : (
+                                                            <div className="motif">
+                                                                <p>EN ATTENTE</p>
+                                                            </div>
+                                                        )
+                                                    }
                                                 </div>
                                             </div> 
                                         )
@@ -484,8 +554,8 @@ function CorpHome() {
                     <div className="coucheGauche">
                         <Link to={"/comptePage"}>
                             <div className="contenue">
-                                <img className='image' src={`http://localhost:5000/images/${user.image}`}/>
-                                <p>{user.nom}</p>
+                                <img className='image' src={`http://localhost:5000/images/${dataUser.image}`}/>
+                                <p>{dataUser.nom}</p>
                             </div>
                         </Link>
                         <Link to={"/listeDetenus"}>
@@ -526,11 +596,14 @@ function CorpHome() {
                                 </div>
                             <div className="divContenue">
 
-                            {dataConge
-                            .filter(item =>
-                                Object.values(item).some(value =>
-                                String(value).toLowerCase().includes(searchValueConge.toLowerCase())
-                                )
+                                {console.log(dataConge)}
+
+                            {  dataConge !== null ? (
+                                dataConge 
+                                .filter(item =>
+                                    Object.values(item).some(value =>
+                                    String(value).toLowerCase().includes(searchValueConge.toLowerCase())
+                                    )
                                 )
                                 .map((item, index) =>
                                     <div key = {index} className="contentConge">
@@ -567,18 +640,32 @@ function CorpHome() {
                                                 </div>
                                             )
                                             }
-                                            <div className="menu" onClick={() => { setShowMenu(!showMenu); setSelectedItem(item); }}>
+                                            <div className="menu" onClick={() => { setShowMenu(!showMenu); setSelectedItem(item.id); }}>
                                                 <p>...</p>
                                             </div>
                                         </div>
-                                        <div className="motif">
-                                            <p>En attente</p>
-                                        </div>
+                                        {
+                                            item.status === 2 ? (
+                                                <div className="motifReff">
+                                                    <p>REFFUSE</p>
+                                                </div>
+                                            ) : item.status === 1 ? (
+                                                <div className="motifAcc">
+                                                    <p>ACCEPTE</p>
+                                                </div>
+                                            ) : (
+                                                <div className="motif">
+                                                    <p>EN ATTENTE</p>
+                                                </div> 
+                                            )
+                                        }
                                     </div>
                                     </div>  
-                                )
-                            }
-
+                                ) 
+                            )
+                                : (
+                                    <li>Aucun congé trouvé.</li>
+                                )}
                             </div>
                         </div>
                     </div>

@@ -66,13 +66,16 @@ function IncidentsAdminPage() {
                             ).map((item) =>                 
                                 <li>
                                     <div className="imageIncidentsListe">
-                                        <img className='personnel-image' src={`http://localhost:5000/images/${user.image}`}/>
+                                        <img className='personnel-image' src={`http://localhost:5000/images/${item.user.image}`}/>
                                     </div>
                                     <div className="textIncidents">
-                                        <h5>Nom de l'utilisateur</h5>
+                                        <h5>{item.user.nom}</h5>
                                         <p className='motifIncidents'>{item.description}</p>
                                         <span>Date: {item.date.substring(0, 10)}</span>
-                                        <span>Nom de la détenus concerné: <Link>Nom de la détenus</Link></span>
+                                        <span>Nom de la détenus concerné: <Link>{item.detenu.nom}</Link></span>
+                                        <div className="imageDetenus">
+                                            <img src={`http://localhost:5000/images/${item.detenu.image}`}/>
+                                        </div>
                                     </div>
                                 </li>
                             )

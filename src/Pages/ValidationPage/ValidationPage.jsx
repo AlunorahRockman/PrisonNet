@@ -14,7 +14,7 @@ function ValidationPage() {
   })
 
   const [valuesUser, setValuesUser] = useState({
-    idUser: id
+    userId: id
   })
 
   const [errors, setErrors] = useState([])

@@ -11,7 +11,9 @@ import ModifierConge from '../Pages/ModifieConge/ModifierConge'
 import ModifierIncident from '../Pages/ModifierIncident/ModifierIncident'
 import ModifierVisite from '../Pages/ModifierVisite/ModifierVisite'
 import UseAdminPage from '../Pages/UseAdminPage/UseAdminPage'
+import UseAfficherAdmin from '../Pages/UseAfficherAdmin/UseAfficherAdmin'
 import UseAfficherPersonnels from '../Pages/UseAfficherPersonnels/UseAfficherPersonnels'
+import UseAfficherVisiteurs from '../Pages/UseAfficherVisiteurs/UseAfficherVisiteurs'
 import UseCellulesAdmin from '../Pages/UseCellulesAdmin/UseCellulesAdmin'
 import UseCompte from '../Pages/UseCompte/UseCompte'
 import UseCongeAdmin from '../Pages/UseCongeAdmin/UseCongeAdmin'
@@ -60,6 +62,8 @@ function PrivateRoot() {
             <Route path='/modifyVisite/:idUser' element={<ModifierVisite/>}/>
             <Route path='/afficherPersonnels/:idUser' element={<UseAfficherPersonnels/>}/>
             <Route path='/detailsDetenus/:id' element={<UseDetailsDetenus/>}/>
+            <Route path='/detailsVisiteurs/:id' element={<UseAfficherVisiteurs/>}/>
+            <Route path='/detailsAdmin/:id' element={<UseAfficherAdmin/>}/>
         </Routes>
     ):<Navigate to={"/login"}/>
 }

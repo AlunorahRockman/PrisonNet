@@ -32,7 +32,9 @@ function ListeIncidents() {
             setData(resultat);
         };
         fetchData();
-    }, []);
+    }, [user.id]);
+
+    console.log(data)
 
     // ! suppression
     const [showConfirmation, setShowConfirmation] = useState(false);

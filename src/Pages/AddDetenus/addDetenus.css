@@ -1,0 +1,43 @@
+.divImageAdd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.divImageAdd img{
+    object-fit: cover;
+    margin-top: 10px;
+    object-position: center;
+    width: 180px;
+    border-radius: 50px;
+    height: 180px;
+    border: 3px solid var(--gray);
+}
+
+.inputImageAdd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.inputImageAdd input{
+    display: none;
+}
+
+.inputImageAdd .labelInput{
+    border: 1px solid var(--orange);
+    padding: 13px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: var(--orange);
+    font-size: var(--font2);
+    text-align: center;
+}
+
+.inputImageAdd .labelInput:hover{
+    background: var(--orange);
+    color: var(--white);
+}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import aina from '../../Outils/icon/aina.png';
 import logo from '../../Outils/icon/logo.png';
@@ -14,7 +15,20 @@ function NavBar() {
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Nouvel état
 
+
+
     const {user} = useAuth()
+
+    const [dataUser, setDataUser] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getOneUsers/${user.id}`);
+            resultat = await resultat.data;
+            setDataUser(resultat);
+        };
+        fetchData();
+    }, []);
 
     const handleNotificationClick = () => {
         setShowNotification(!showNotification);
@@ -61,7 +75,7 @@ function NavBar() {
                 <img src={notificationIcon} alt="notification Icon" />
             </div>
             <div className="photo" onClick={handleProfileClick}>
-                <img src={`http://localhost:5000/images/${user.image}`}/>
+                <img src={`http://localhost:5000/images/${dataUser.image}`}/>
                 <div className="photo-bg"></div>
             </div>
             </div>
@@ -229,10 +243,10 @@ function NavBar() {
                     <Link to="/comptePage">
                         <div className="dropCompte">
                             <div className="divImage">
-                                <img src={`http://localhost:5000/images/${user.image}`}/>
+                                <img src={`http://localhost:5000/images/${dataUser.image}`}/>
                             </div>
                             <div className="textDrop">
-                                <p>{user.nom}</p>
+                                <p>{dataUser.nom}</p>
                             </div>
                         </div>
                     </Link>

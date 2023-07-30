@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import errorIcon from "../../Outils/icon/error.ico";
 import axios from 'axios';
+import { useAuth } from '../../hooks/useAuth';
 import "./addDetenus.css"
 
 function AddDetenus() {
 
+    const {user} = useAuth()
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
 
@@ -19,7 +21,7 @@ function AddDetenus() {
         dureePeine: "",
         dateVenue: "",
         raison: "",
-        image: "user.jpg",
+        image: "detenus.jpg",
         statut: 0,
     });
 
@@ -36,10 +38,17 @@ function AddDetenus() {
                 setErrors(err.response.data);
             }
         });
-    };
+    }
 
     return (
         <div className="containerAddPers">
+            {/* <div className="divImageAdd">
+                <img src={`http://localhost:5000/images/detenus.jpg`}/>
+            </div>
+            <div className="inputImageAdd">
+                <input id='image' type="file" />
+                <label className='labelInput' htmlFor="image">Importer une photo</label>
+            </div> */}
             <h1>Ajouter un(e) détenus(es)</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="nom">Nom:</label>

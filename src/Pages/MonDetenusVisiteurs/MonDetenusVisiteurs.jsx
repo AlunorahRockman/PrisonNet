@@ -15,6 +15,7 @@ function MonDetenusVisiteurs() {
     const [searchValue, setSearchValue] = useState('');
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [errors, setErrors] = useState([]);
+    const [idVis, setIdVis] = useState(null);
     const navigate = useNavigate();
 
     const {user} = useAuth()
@@ -23,19 +24,58 @@ function MonDetenusVisiteurs() {
         setSearchValue(event.target.value);
     };
 
+    const fetchData = async () => {
+        try {
+            const resultat = await axios.get(`http://localhost:5000/getIdVisiteur/${user.id}`);
+            const idVisiteur = resultat.data;
+            setIdVis(idVisiteur);
+
+            setValues({
+                ...values,
+                visiteurId: idVisiteur
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    console.log(idVis)
+    
+    useEffect(() => {
+        fetchData();
+    }, [user.id]);
+    
+    useEffect(() => {
+        const fetchMonDetenus = async () => {
+            try {
+                if (idVis) {
+                    const resultat = await axios.get(`http://localhost:5000/getMonDetenus/${idVis}`);
+                    setData(resultat.data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        fetchMonDetenus();
+    }, [idVis]);
+
+    console.log(data)
+    
+
     const handleModalOpen = (itemId) => {
         setSelectedItemId(itemId);
         setValues({
             ...values,
-            idDetenus: itemId
+            detenuId: itemId
         });
         console.log(itemId);
     };
 
 
     const [values, setValues] = useState({
-        idVisiteur: user.id,
-        idDetenus: null,
+        visiteurId: null,
+        detenuId: null,
         description: "",
         dateVisite: "",
         heure: "",
@@ -62,15 +102,7 @@ function MonDetenusVisiteurs() {
         });
     };
 
-    useEffect(() => {
-        const fetchData=async ()=>{ 
-            let resultat = await axios.get(`http://localhost:5000/detenus`)
-            resultat = await resultat.data;
-            setData(resultat)
-        }
-        fetchData()
-    }, [])
-    
+
     return (
         <div className='corpsPersonnel'>
             <div className="gauchePrisonnier">
@@ -94,27 +126,29 @@ function MonDetenusVisiteurs() {
                     {
                         data
                         .filter(item =>
-                            Object.values(item).some(value =>
-                            String(value).toLowerCase().includes(searchValue.toLowerCase())
+                            Object.values(item.detenu).some(value => 
+                                String(value).toLowerCase().includes(searchValue.toLowerCase())
                             )
-                        ).map((item) =>                 
+                        )
+                        .map((item) =>                 
                             <div className="contenuePrisonnier">
                                 <div className="imagePrisonnier">
-                                    <img src={`http://localhost:5000/images/${item.image}`}/>
+                                    <img src={`http://localhost:5000/images/${item.detenu.image}`}/>
                                 </div>
                                 <div className="titrePrisonnier">
-                                    <p>{item.nom}</p>
-                                    <h5>{item.dateVenue.substring(0, 10)}</h5>
+                                    <div className="divHorizontal">
+                                        <p>{item.detenu.nom}</p>
+                                        <h5>{item.detenu.dateVenue.substring(0, 10)}</h5>
+                                    </div>
                                     <hr className='hr' />
-                                    <h6>{item.adresse}</h6>
+                                    <h6>{item.detenu.adresse}</h6>
                                 </div>
                                 <div className="buttonPrisonnier">
-                                    <button className='buttonIray' onClick={() => handleModalOpen(item.id)}>Visiter</button>
+                                    <button className='buttonIray' onClick={() => handleModalOpen(item.detenu.id)}>Visiter</button>
                                 </div>
                             </div>
                     )
                     }
-
                 </div>
             </div>
             {selectedItemId && (

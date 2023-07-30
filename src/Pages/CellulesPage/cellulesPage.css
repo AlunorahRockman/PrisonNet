@@ -103,3 +103,15 @@
     border-radius: 50%;
     border: 0.1px solid var(--gray);
 }
+.modal-content form .inputModal select{
+    background: var(--black);
+    border: none;
+    height: 45px;
+    color: var(--gray);
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.modal-content form .inputModal select:focus{
+    outline: 0.1px dotted var(--orange);
+}

@@ -14,10 +14,9 @@ function ListeDetenusPersonnel() {
     const [searchValue, setSearchValue] = useState('');
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [errors, setErrors] = useState([]);
-    const navigate = useNavigate();
-
-
+    const [idPers, setIdPers] = useState(null);
     const {user} = useAuth()
+    const navigate = useNavigate();
 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
@@ -27,14 +26,14 @@ function ListeDetenusPersonnel() {
         setSelectedItemId(itemId);
         setValues({
             ...values,
-            idDetenus: itemId
+            detenuId: itemId
         });
         console.log(itemId);
     };
 
     const [values, setValues] = useState({
-        idDetenus: null,
-        idPersonnel: user.id,
+        detenuId: null,
+        userId: user.id,
         description: "",
         date: "",
         statut: 0
@@ -64,8 +63,8 @@ function ListeDetenusPersonnel() {
     useEffect(() => {
         const fetchData = async () => {
         let resultat = await axios.get(`http://localhost:5000/detenus`);
-        resultat = await resultat.data;
-        setData(resultat);
+            resultat = await resultat.data;
+            setData(resultat);
         };
         fetchData();
     }, []);

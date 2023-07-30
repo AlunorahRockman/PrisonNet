@@ -85,7 +85,7 @@ function AdminPage() {
                                             <td>{item.sexe}</td>
                                             <td>{item.phone}</td>
                                             <td>
-                                                <Link to={'/'}>
+                                                <Link to={`/detailsAdmin/${item.id}`}>
                                                     <button className='btnKely'>Afficher</button>
                                                 </Link>
                                             </td>    

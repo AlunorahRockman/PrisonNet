@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import aina from "../../Outils/icon/aina.png";
 import logo from "../../Outils/icon/logo.png";
 import deconnecterIcon from "../../Outils/icon/logout.ico";
@@ -21,12 +21,22 @@ function NavBarMessage() {
 
     const {user} = useAuth()
 
+    const [dataUser, setDataUser] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getOneUsers/${user.id}`);
+            resultat = await resultat.data;
+            setDataUser(resultat);
+        };
+        fetchData();
+    }, []);
+
     function logout() {
         localStorage.clear();
         window.location.reload();
     }
 
-    
     const openConfirmationModal = () => {
         setShowConfirmationModal(true);
     };
@@ -59,7 +69,7 @@ function NavBarMessage() {
                 <img src={notificationIcon} alt="notification Icon" />
             </div>
             <div className="photo" onClick={handleProfileClick}>
-                <img src={`http://localhost:5000/images/${user.image}`}/>
+                <img src={`http://localhost:5000/images/${dataUser.image}`}/>
                 <div className="photo-bg"></div>
             </div>
             </div>
@@ -227,10 +237,10 @@ function NavBarMessage() {
                     <Link to="/comptePage">
                         <div className="dropCompte">
                             <div className="divImage">
-                                <img src={`http://localhost:5000/images/${user.image}`}/>
+                                <img src={`http://localhost:5000/images/${dataUser.image}`}/>
                             </div>
                             <div className="textDrop">
-                                <p>{user.nom}</p>
+                                <p>{dataUser.nom}</p>
                             </div>
                         </div>
                     </Link>
@@ -252,11 +262,11 @@ function NavBarMessage() {
                 <div className="modalContent">
                     <h3>Confirmer la déconnexion</h3>
                     <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
-                <hr className='hr' />
-                <div className="modalActions">
-                    <button className='ok' onClick={logout}>OK</button>
-                    <button className='annuler' onClick={closeConfirmationModal}>Annuler</button>
-                </div>
+                    <hr className='hr' />
+                    <div className="modalActions">
+                        <button className='ok' onClick={logout}>OK</button>
+                        <button className='annuler' onClick={closeConfirmationModal}>Annuler</button>
+                    </div>
                 </div>
             </div>
         )}

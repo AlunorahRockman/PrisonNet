@@ -27,6 +27,7 @@ function VisiteursPageAdmin() {
         fetchData()
     }, [])
 
+    console.log(data)
 
     return (
         <div className='corpsPersonnel'>
@@ -75,9 +76,11 @@ function VisiteursPageAdmin() {
                                         Object.values(item).some(value =>
                                         String(value).toLowerCase().includes(searchValue.toLowerCase())
                                         )
-                                    ).map((item) => 
-                                        <tr>
-                                            <td><img src={aina}/></td>
+                                    ).map((item,index) => 
+                                        <tr key={index}>
+                                            <td>
+                                            <img className='image' src={`http://localhost:5000/images/${item.image}`}/>
+                                            </td>
                                             <td>{item.nom}</td>
                                             <td>{item.prenom}</td>
                                             <td>{item.adresse}</td>
@@ -86,7 +89,7 @@ function VisiteursPageAdmin() {
                                             <td>{item.sexe}</td>
                                             <td>{item.phone}</td>
                                             <td>
-                                                <Link to={'/'}>
+                                                <Link to={`/detailsVisiteurs/${item.id}`}>
                                                     <button className='btnKely'>Afficher</button>
                                                 </Link>
                                             </td>    
@@ -95,18 +98,6 @@ function VisiteursPageAdmin() {
                                 }
                             </tbody>
                         </table>
-                        {/* <div className='trBtn'>
-                            <Link to={'/'}>
-                                <button className='addBtn'>
-                                    <div className="icon">
-                                        <img src={addPersIcon}/>
-                                    </div>
-                                    <div className="text">
-                                        <p>Ajouter</p>
-                                    </div>
-                                </button>
-                            </Link>  
-                        </div> */}
                     </div>
                 </div>
             </div>

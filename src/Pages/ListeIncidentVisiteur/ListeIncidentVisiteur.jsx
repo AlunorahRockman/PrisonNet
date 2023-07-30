@@ -15,6 +15,7 @@ function ListeIncidentVisiteur() {
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
+    const [idVis, setIdVis] = useState(null)
     const [showMenu, setShowMenu] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const {user} = useAuth()
@@ -24,13 +25,17 @@ function ListeIncidentVisiteur() {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            let resultat = await axios.get(`http://localhost:5000/getIncidentByOneUser/${user.id}`);
-            resultat = await resultat.data;
-            setData(resultat);
+        const fetchMonDetenus = async () => {
+            try {
+                const resultat = await axios.get(`http://localhost:5000/getIncidentByOneUser/${user.id}`);
+                setData(resultat.data);
+            } catch (error) {
+                console.error(error);
+            }
         };
-        fetchData();
-    }, []);
+    
+        fetchMonDetenus();
+    }, [user.id]);
 
         // ! suppression
         const [showConfirmation, setShowConfirmation] = useState(false);
@@ -53,7 +58,6 @@ function ListeIncidentVisiteur() {
             window.location.reload();
             setShowConfirmation(false);
         };
-        // ! suppression
 
     return (
 

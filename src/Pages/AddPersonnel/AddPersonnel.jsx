@@ -37,7 +37,7 @@ function AddPersonnel() {
     });
 
     const [valuesPersonnels, setValuesPersonnels] = useState({
-        idUser: "",
+        userId: "",
         departement: "",
         poste: "",
         salaire: "",
@@ -64,7 +64,7 @@ function AddPersonnel() {
             let id = res.data.id;
             setValuesPersonnels(prevState => ({
                 ...prevState,
-                idUser: id
+                userId: id
                 }));
             
                 const today = new Date();

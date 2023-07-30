@@ -7,7 +7,7 @@ import "./nouvellePassPage.css"
 
 function NouvellePassPage() {
 
-  const {id} = useParams();
+  const {id} = useParams()
 
   const [values, setValues] = useState({
       userId: id,
@@ -15,7 +15,7 @@ function NouvellePassPage() {
       confirmPass: ""
   })
 
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState('')
   
   const [showPassword, setShowPassword] = useState(false);
 
@@ -39,10 +39,8 @@ function NouvellePassPage() {
       navigate('/login')
     })
     .catch(err => {
-      console.log(err)
-      console.log(err)
       if (err.response.status === 401) {
-          setErrors(err.response.data);
+          setErrors(err.response.data.message);
       }
     })
 

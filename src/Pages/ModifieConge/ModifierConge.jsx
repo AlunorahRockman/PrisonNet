@@ -22,6 +22,7 @@ function ModifierConge() {
             .then(response => {
                 console.log(response.data);
                 navigate('/')
+                window.location.reload()
             })
             .catch(err => {
                 console.error(err);

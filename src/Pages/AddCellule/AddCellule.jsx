@@ -14,7 +14,7 @@ function AddCellule() {
         numero: "",
         capaciteMax: "",
         superficie: "",
-        statut: 0,
+        statut: 1,
     });
 
 

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import retourIcon from "../../Outils/icon/retour.ico";
-import aina from "../../Outils/icon/aina.png";
 import errorIcon from "../../Outils/icon/error.ico";
 import { useAuth } from '../../hooks/useAuth';
 
@@ -11,51 +9,70 @@ import "./compte.css"
 function Compte() {
 
     const {user} = useAuth()
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState([])
     const navigate = useNavigate()
+
+    const [dataUser, setDataUser] = useState({
+        nom: "",
+        prenom: "",
+        sexe: "",
+        email: "",
+        adresse: "",
+        dateNaissance: "",
+        phone: ""
+    });
+
+    useEffect(() => {
+        const fetchData = async () => {
+            let resultat = await axios.get(`http://localhost:5000/getOneUsers/${user.id}`);
+            resultat = await resultat.data;
+            setDataUser(resultat);
+        };
+        fetchData();
+    }, []);
 
     const [nom, setNom] = useState("");
     useEffect(() => {
-        const valeurRecente = user.nom;
+        const valeurRecente = dataUser.nom;
         setNom(valeurRecente);
-    }, []);
+    }, [dataUser.nom]);
     
     const [prenom, setPrenom] = useState("");
     useEffect(() => {
-        const valeurRecente = user.prenom;
+        const valeurRecente = dataUser.prenom;
         setPrenom(valeurRecente);
-    }, []);
+    }, [dataUser.prenom]);
 
     const [sexe, setSexe] = useState("");
     useEffect(() => {
-        const valeurRecente = user.sexe;
+        const valeurRecente = dataUser.sexe;
         setSexe(valeurRecente);
-    }, []);
+    }, [dataUser.sexe]);
 
     const [email, setEmail] = useState("");
     useEffect(() => {
-        const valeurRecente = user.email;
+        const valeurRecente = dataUser.email;
         setEmail(valeurRecente);
-    }, []);
+    }, [dataUser.email]);
 
     const [adresse, setAdresse] = useState("");
     useEffect(() => {
-        const valeurRecente = user.adresse;
+        const valeurRecente = dataUser.adresse;
         setAdresse(valeurRecente);
-    }, []);
+    }, [dataUser.adresse]);
 
     const [dateNaissance, setDateNaissance] = useState("");
     useEffect(() => {
-        const valeurRecente = user.dateNaissance.substring(0, 10);
+        const valeurRecente = dataUser.dateNaissance.substring(0, 10)
         setDateNaissance(valeurRecente);
-    }, []);
+    }, [dataUser.dateNaissance]);
 
     const [phone, setPhone] = useState("");
     useEffect(() => {
-        const valeurRecente = user.phone;
+        const valeurRecente = dataUser.phone;
         setPhone(valeurRecente);
-    }, []);
-
+    }, [dataUser.phone]);
+    
     const handleSubmit = (e) => {
         e.preventDefault();
     
@@ -72,8 +89,9 @@ function Compte() {
 
         axios.put(`http://localhost:5000/updateUser/${user.id}`, updatedUser)
             .then(response => {
-            console.log(response.data);
+                console.log(response.data);
                 navigate('/')
+                window.location.reload()
             })
             .catch(err => {
                 console.error(err); 
@@ -83,6 +101,76 @@ function Compte() {
             });
     };
 
+    // ! Image *****************************
+
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+    const [showCancelButton, setShowCancelButton] = useState(false);
+    const [showSaveButton, setShowSaveButton] = useState(false); 
+    
+    const handleFileChange = (event) => {
+        setSelectedFile(event.target.files[0]);
+        setPreviewImage(URL.createObjectURL(event.target.files[0]));
+        setShowCancelButton(true);
+        setShowSaveButton(true);
+    };
+    
+    const handleCancel = () => {
+        setSelectedFile(null);
+        setPreviewImage(null);
+        setShowCancelButton(false);
+        setShowSaveButton(false);
+    };
+    
+
+    const handleUpload = () => {
+        if (!selectedFile) {
+            alert("Veuillez sélectionner une image.");
+            return;
+        }
+
+        const currentFileName = selectedFile.name;
+
+        let fileName = "";
+
+        if (user.type_compte === "Admin") {
+            fileName = `${user.id}Admin`;
+        }
+
+        if (user.type_compte === "Visiteur") {
+            fileName = `${user.id}Visiteur`;
+        }
+
+        if (user.type_compte === "Personnel") {
+            fileName = `${user.id}Personnel`;
+        }
+
+        const formData = new FormData();
+        formData.append("image", selectedFile);
+
+
+        axios.post(`http://localhost:5000/upload/${fileName}`, formData)
+            .then((response) => {
+                console.log(response.data);
+                axios.put(`http://localhost:5000/setImage/${user.id}/${fileName}`)
+                .then((response) => {
+                    console.log(response.data.message);
+                    navigate('/')
+                    window.location.reload()
+                })
+                .catch((error) => {
+                    console.error(error.response.data.message);
+                    alert("Une erreur est survenue lors de la modification de l'image.");
+                });
+            })
+            .catch((error) => {
+                console.error(error.response.data.message);
+                alert("Une erreur est survenue lors du téléchargement de l'image.");
+            });
+    };
+
+
+// ! **********************************************
 
     return (
         <div className='corpHome'>
@@ -141,21 +229,31 @@ function Compte() {
             <div className="droiteCompte">
                 <div className="imageCompte">
                     <div className="photoCompte">
-                        <img className='image' src={`http://localhost:5000/images/${user.image}`}/>
+                        {previewImage ? (
+                            <img className='image' src={previewImage} alt="Image sélectionnée" />
+                        ) : (
+                            <img className='image' src={`http://localhost:5000/images/${dataUser.image}`} alt="Image de profil" />
+                        )}
                     </div>
                     <div className="divInputTitre">
-                        <div className="titreInput">
-                            <p>Photo de profil</p>
-                        </div>
+                        {showCancelButton ? ( 
+                            <div className="titreInput">
+                                <button onClick={handleCancel}>Annuler</button>
+                            </div>
+                        ) : (
+                            <div className="titreInput">
+                                <p>Photo de profil</p>
+                            </div>
+                        )}
                         <div className="inputBtn">
                             <label htmlFor="file">Importer une photo</label>
-                            <input type="file" id='file'/>
+                            <input type="file" onChange={handleFileChange} id='file'/>
                         </div>
                     </div>
 
                     <div className="divBtn">
                         <hr className='hr'/>
-                        <button>Enregistrer</button>
+                        {showSaveButton && <button onClick={handleUpload}>Enregistrer</button>}
                     </div>
                 </div>
             </div>
