@@ -72,7 +72,7 @@ function IncidentsAdminPage() {
                                         <h5>{item.user.nom}</h5>
                                         <p className='motifIncidents'>{item.description}</p>
                                         <span>Date: {item.date.substring(0, 10)}</span>
-                                        <span>Nom de la détenus concerné: <Link>{item.detenu.nom}</Link></span>
+                                        <span>Nom de la détenus concerné: <Link to={`/showDetenusIncident/${item.detenu.id}`}>{item.detenu.nom}</Link></span>
                                         <div className="imageDetenus">
                                             <img src={`http://localhost:5000/images/${item.detenu.image}`}/>
                                         </div>

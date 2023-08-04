@@ -43,6 +43,13 @@
     border: none;
 }
 
+.central .alert{
+    margin-top: 80px;
+    color: var(--orange);
+    font-size: var(--font2);
+    padding: 5px;
+}
+
 .inputRechercherDis input:focus{
     outline: none;
 }
@@ -192,7 +199,71 @@
     overflow-x: hidden;
     padding: 10px;
 }
+
+
+.scroll-container {
+    height: 300px; 
+    overflow-y: scroll; 
+    display: flex;
+    flex-direction: column;
+}
+
+.centralMessage .divImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .centralMessage .sender{
+    max-width: 50%;
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+    align-items: center;
+    justify-content: right;
+    gap: 10px;
+    font-size: var(--font2);
+}
+
+.centralMessage .divContenue{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.centralMessage .recipient{
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    align-self: flex-start;
+    font-size: var(--font2);
+}
+
+.centralMessage .sender .nom p{
+    margin: 0;
+    padding: 0;
+    font-size: var(--font1);
+    text-align: right;
+}
+
+.centralMessage .recipient .nom p{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: var(--font1);
+    text-align: left;
+}
+
+.centralMessage .heure p{
+    margin: 0;
+    padding: 0;
+    font-size: var(--font1);
+    color: var(--gray);
+}
+
+.centralMessage .gauche{
     background: var(--orange);
     border-radius: 20px;
     border-radius: 0 20px 20px 20px;
@@ -201,12 +272,11 @@
     padding-bottom: 0.5px; 
     padding-right: 20px;
     height: auto;
-    color: var(--white);
-    max-width: 50%;
-    display: inline-block;
-    align-self: flex-end;
+    width: auto;
+    color: var(--black);
 }
-.centralMessage .recipient{
+
+.centralMessage .droite{
     background: var(--dark3);
     border-radius: 20px 0 20px 20px;
     padding-left:20px;
@@ -215,35 +285,9 @@
     padding-right: 20px;
     height: auto;
     color: var(--white);
-    max-width: 50%;
-    display: inline-block;
-    align-self: flex-start;
+    width: auto;
 }
-.sender p{
-    font-size: 13px;
-    text-align: left;
-    color: var(--black);
-}
-.sender h6{
-    font-size: 10px;
-    text-align: left;
-    margin: 0;
-    padding: 0;
-    color: var(--dark);
-    padding-bottom: 10px;
-}
-.recipient p{
-    font-size: 13px;
-    text-align: left;
-}
-.recipient h6{
-    font-size: 10px;
-    margin: 0;
-    text-align: left;
-    padding: 0;
-    color: var(--gray);
-    padding-bottom: 10px;
-}
+
 
 .messanger .centralCenter{
     width: 100%;
@@ -253,3 +297,4 @@
 .selected {
     background-color: var(--dark2);
 }
+

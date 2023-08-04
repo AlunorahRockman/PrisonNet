@@ -73,10 +73,10 @@ function NouvellePassPage() {
                   errors && errors.length > 0 && (
                   <div className="errors">
                       <div className="errorIcon">
-                      <img src={errorIcon} alt="erreur" />
+                        <img src={errorIcon} alt="erreur" />
                       </div>
                       <div className="errorText">
-                      <p>{errors}</p>
+                        <p>{errors}</p>
                       </div>
                   </div>
                   )

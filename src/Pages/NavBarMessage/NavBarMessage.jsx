@@ -82,7 +82,7 @@ function NavBarMessage() {
                         <hr className='hr' />
                     </div>
                     <div className="divContainerNotif">
-                        
+{/*                         
                         <Link to={'/'}>
                             <div className="contenueNotif">
                                 <div className="coucheContenue">
@@ -95,136 +95,8 @@ function NavBarMessage() {
                                     </div>
                                 </div>
                             </div>
-                        </Link>
+                        </Link> */}
 
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
 
                     </div>
                 </div>

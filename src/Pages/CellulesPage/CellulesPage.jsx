@@ -5,6 +5,7 @@ import retourIcon from "../../Outils/icon/retour.ico";
 import modifyIcon from "../../Outils/icon/modify.ico";
 import deleteIcon from "../../Outils/icon/delete.ico";
 import addPersIcon from "../../Outils/icon/addPers.ico";
+import entrerIcon from "../../Outils/icon/entrer.ico";
 import errorIcon from "../../Outils/icon/error.ico";
 import aina from "../../Outils/icon/aina.png";
 import { FaSearch } from 'react-icons/fa';
@@ -136,6 +137,7 @@ function CellulesPage() {
                     <table>
                         <thead>
                             <tr>
+                                <td></td>
                                 <td>Numero</td>
                                 <td>Capacité maximal</td>
                                 <td>Superficie</td>
@@ -153,6 +155,7 @@ function CellulesPage() {
                                 (item.statut === 1 ? "Libre" : "Occupé").toLowerCase().includes(searchValue.toLowerCase())
                             ).map((item, index) => 
                                 <tr key={index}>
+                                    <td><Link to={`/celluleShow/${item.id}`}><button className='detailBtn'><img className='img' src={entrerIcon}/></button></Link></td>
                                     <td>{item.numero}</td>
                                     <td>{item.capaciteMax} Détenus</td>
                                     <td>{item.superficie} m<sup>2</sup></td>

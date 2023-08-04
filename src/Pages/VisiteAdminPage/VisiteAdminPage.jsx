@@ -4,7 +4,9 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import retourIcon from "../../Outils/icon/retour.ico";
 import aina from "../../Outils/icon/aina.png";
 import { useAuth } from '../../hooks/useAuth';
-import Modal from 'react-modal'; 
+import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 import "./visiteAdminPage.css"
 
@@ -71,6 +73,10 @@ function VisiteAdminPage() {
                     closeModalReff(); 
                 });
         }
+        toast.success(`Mise a jour enregistré!`, {
+            position: 'bottom-right',
+            autoClose: 5000,
+        });
     };
 
     // ! ************************
@@ -131,7 +137,7 @@ function VisiteAdminPage() {
                                     <hr className='hr' />
                                     <h1>Date de visite: {item.dateVisite.substring(0, 10)}</h1>
                                     <hr className='hr' />
-                                    <h2>Nom de la détenus: <Link to={'/'}>{item.detenu.nom}</Link></h2>
+                                    <h2>Nom de la détenus: <Link to={`/showDetenus/${item.detenu.id}`}>{item.detenu.nom}</Link></h2>
                                     <hr className='hr' />
                                 </div>
                             </div>
@@ -192,6 +198,9 @@ function VisiteAdminPage() {
                 <button onClick={closeModalReff} className="annuler">Non</button>
             </div>
         </Modal>
+        <ToastContainer
+                theme='dark'
+            />
     </div>
     )
 }

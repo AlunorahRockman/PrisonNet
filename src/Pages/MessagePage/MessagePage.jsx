@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import io from 'socket.io-client';
+
 import { useAuth } from '../../hooks/useAuth';
 
 import retourIcon from "../../Outils/icon/retour.ico";
@@ -9,94 +9,145 @@ import sendIcon from "../../Outils/icon/send.ico";
 import aina from "../../Outils/icon/aina.png";
 import { FaSearch } from 'react-icons/fa';
 import moment from 'moment';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import "./messagePage.css";
 
-const socket = io.connect('http://localhost:5000');
 
 function MessagePage() {
     const [data, setData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
-    const [receiverId, setReceiverId] = useState(null);
-    const [nomUser, setnomUser] = useState("")
+    const [nomUser, setnomUser] = useState("");
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [roomId, setRoomId]=useState()
+    const [roomIdNotif, setRoomIdNotif]=useState()
 
+    const [currentMessage, setCurrentMessage] = useState()
+    const [messageList, setMessageList] = useState([])
 
-    const {user}=useAuth()
+    const [senderName, setSenderName] = useState('');
+    const [messageContent, setMessageContent] = useState('');
+
+    const { socket } = useAuth();
+    const { user } = useAuth();
 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
     };
 
-    const handleMessageChange = (event) => {
-        setMessage(event.target.value);
-    };
-
     useEffect(() => {
         const fetchData = async () => {
-        try {
-            const response = await axios.get(`http://localhost:5000/users/${user.id}`);
-            setData(response.data);
-        } catch (error) {
-            console.error('Error fetching users:', error);
-        }
+            try {
+                const response = await axios.get(`http://localhost:5000/users/${user.id}`);
+                setData(response.data);
+                if (selectedUserId === null && response.data.length > 0) {
+                    setnomUser(response.data[0].nom);
+                    setSelectedUserId(response.data[0].id);
+                    setSelectedImage(response.data[0].image);
+                }
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
         };
-        fetchData();
+        fetchData()
     }, []);
+
+    useEffect(()=>{
+        if(!socket)return
+
+        socket.emit('join-chat', {
+            me:user.id,
+        })
+
+        socket.on('new-message', data=>{
+            console.log(messageList)
+            setMessageList([...messageList, data])
+            const senderName = data.sender.nom;
+            const messageContent = data.message;
+            setSenderName(senderName)
+            setMessageContent(messageContent)
+
+        })
+
+    }, [socket])
 
     useEffect(() => {
-        socket.on('message', (data) => {
-        console.log('Message received:', data);
-        setMessages((prevMessages) => [...prevMessages, data]);
-        getMessages(receiverId, user.id);
-        });
+        if (senderName && messageContent) {
+            toast.success(`Nouveau message de ${senderName} : ${messageContent}`, {
+                position: 'bottom-right',
+                autoClose: 5000,
+            });
+        }
+    }, [senderName, messageContent]);
 
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
+    
 
     const handleUserClick = (id, nom, image) => {
-        setReceiverId(id);
         setnomUser(nom);
         setSelectedUserId(id);
         setSelectedImage(image);
-        getMessages(id, user.id);
     };
 
-    const getMessages = (idRecever, idSender) => {
-        axios.get(`http://localhost:5000/messages/${idRecever}/${idSender}`)
-        .then(response => {
-            const messages = response.data;
-            // Mettez à jour l'état des messages avec les nouveaux messages reçus
-            setMessages(messages);
-            console.log(messages)
-        })
-        .catch(error => {
-            console.error('Error fetching messages:', error);
-        });
+    useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:5000/messages/${user.id}/${selectedUserId}`);
+            setMessageList(response.data);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
     };
+    fetchData()
+    }, [handleUserClick]);
+
+    // ! Message 
 
     const sendMessage = () => {
-        if (!receiverId) {
-            console.warn('No receiver selected');
-        return;
+        if(currentMessage !== ""){
+            const messageData = {
+                idSender: user.id,
+                idRecever: selectedUserId,
+                message: currentMessage,
+                estVue: 0
+            }
+
+            socket.emit("send_message", {
+                roomId:roomId,
+                content:messageData
+            })
         }
+        setCurrentMessage(''); 
+    }
 
-        const messageData = {
-            idSender: user.id,
-            idRecever: receiverId,
-            message: message,
-            estVue: false
-        };
+    const sendNotification = () => {
+            const notificationData = {
+                senderId: user.id,
+                receverId: selectedUserId,
+                link: '/fideran',
+                message: "une message envoyé",
+                isRead: 0
+            }
 
-        socket.emit('message', messageData);
-        getMessages(receiverId, user.id);
+            socket.emit("send_notification", {
+                roomId: roomIdNotif,
+                content: notificationData
+            })
+    }
+
+    const handleKeyPress = event => {
+        if (event.key === 'Enter') {
+            sendMessage();
+            sendNotification();
+        }
     };
+
+
+    // ! Message
+
 
     return (
         <div className='messanger'>
@@ -142,50 +193,74 @@ function MessagePage() {
                         </div>
                     </div>
                 </div>
-                <div className="central">
-                    <div className="topImage">
-                        <Link to={`/`}>
-                            <img src={`http://localhost:5000/images/${selectedImage}`}/>
-                        </Link>
-                        <p>{nomUser}</p>
-                    </div>
-                    <div className="centralMessage">
-                        {messages.map((message, index) => message.idSender === user.id ?
-                            <div key={index} className="sender">
-                                <p>{message.message}</p>
-                                <h6>{moment(message.createdAt).format('DD/MM/YYYY -> HH:mm')}</h6>
-                            </div>:
-                            <div key={index} className="recipient">
-                                <p>{message.message}</p>
-                                <h6>{moment(message.createdAt).format('DD/MM/YYYY HH:mm')}</h6>
+                        <div className="central">
+                            <div className="topImage">
+                                <Link to={`/`}>
+                                    <img src={`http://localhost:5000/images/${selectedImage}`}/>
+                                </Link>
+                                <p>{nomUser}</p>
                             </div>
-                        )}
+                                <div className='centralMessage'>
+                                    {messageList.map((item, index) => {
+
+                                    const formattedDate = moment(item.createdAt).format('HH:mm:ss');
+
+                                    return (
+                                        <div className={user.id === item.idSender ? "sender" : "recipient"} key={index}>
+                                            <div className="nom">
+                                                <p></p>
+                                            </div>
+                                            <div className="divContenue">
+                                                <div className="divImage">
+                                                    {user.id === item.idSender ? null : (
+                                                        <img src={`http://localhost:5000/images/${item.sender.image}`} />
+                                                    )}
+                                                </div>
+                                                <div className={user.id === item.idSender ? "gauche" : "droite"}>
+                                                    <p>{item.message}</p>
+                                                </div>
+                                            </div>
+                                            <div className="heure">
+                                                <p>{formattedDate}</p>
+                                            </div>
+                                        </div>
+                                    );
+                            
+                                    })}
+                                </div>
+
+                            <div className="divFotter">
+                                <input
+                                id='text'
+                                name="contenue"
+                                onKeyPress={handleKeyPress}
+                                value={currentMessage}
+                                onChange={(event) => {
+                                    setCurrentMessage(event.target.value)
+                                }}
+                                type="text"
+                                placeholder='Aa...'
+                                />
+                                {/* <button onClick={sendMessage}> 
+                                    <img src={sendIcon} alt="Send" />
+                                </button> */}
+                            </div>
+                        </div>
+
+                    <div className="droitCentral">
+                        <div className="droiteCover">
+                            <Link to={`/`}>
+                                <img src={`http://localhost:5000/images/${selectedImage}`}/>
+                            </Link>
+                        </div>
+                        <div className="nom">
+                            <p>{nomUser}</p>
+                        </div>
                     </div>
-                    <div className="divFotter">
-                        <input
-                        id='text'
-                        name="contenue"
-                        value={message}
-                        onChange={handleMessageChange}
-                        type="text"
-                        placeholder='Aa...'
-                        />
-                        <button onClick={sendMessage}>
-                            <img src={sendIcon} alt="Send" />
-                        </button>
-                    </div>
-                </div>
-                <div className="droitCentral">
-                    <div className="droiteCover">
-                        <Link to={`/`}>
-                            <img src={`http://localhost:5000/images/${selectedImage}`}/>
-                        </Link>
-                    </div>
-                    <div className="nom">
-                        <p>{nomUser}</p>
-                    </div>
-                </div>
             </div>
+            <ToastContainer
+                theme='dark'
+            />
         </div>
     );
 }

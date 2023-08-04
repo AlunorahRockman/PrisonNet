@@ -51,12 +51,12 @@ function ListeIncidentVisiteur() {
             axios.delete(`http://localhost:5000/deleteIncident/${selected.id}`)
             .then(response => {
                 console.log(response.data);
+                window.location.reload();
+                setShowConfirmation(false);
             })
             .catch(error => {
                 console.error(error);
             });
-            window.location.reload();
-            setShowConfirmation(false);
         };
 
     return (
@@ -111,18 +111,18 @@ function ListeIncidentVisiteur() {
 
                                             </div>
                                             {
-                                            showMenu && selectedItem && (
-                                                <div className="menu-overlay">
-                                                    <div className="menu-container">
-                                                        <Link to={`/modifyIncident/${item.id}`} className="menu-option">
-                                                            <FaEdit className="menu-icon" />
-                                                        </Link>
-                                                        <div className="menu-option" onClick={() => handleDelete(item.id)}>
-                                                            <FaTrash className="menu-icon" />
+                                                showMenu && selectedItem && (
+                                                    <div className="menu-overlay">
+                                                        <div className="menu-container">
+                                                            <Link to={`/modifyIncident/${item.id}`} className="menu-option">
+                                                                <FaEdit className="menu-icon" />
+                                                            </Link>
+                                                            <div className="menu-option" onClick={() => handleDelete(item.id)}>
+                                                                <FaTrash className="menu-icon" />
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            )
+                                                )
                                             }
                                             <div className="menu" onClick={() => { setShowMenu(!showMenu); setSelectedItem(item); }}>
                                                 <p>...</p>

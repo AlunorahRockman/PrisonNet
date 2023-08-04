@@ -17,6 +17,27 @@
     border-radius: 0 0 10px 10px;
 }
 
+.divBouton2{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 20px;
+}
+
+.divBouton2 button{
+    color: var(--black);
+    background: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 13px;
+    font-size: var(--font2);
+    border-radius: 10px;
+}
+.divBouton2 button:hover{
+    border: 1px solid var(--orange);
+    color:var(--orange);
+    background: none;
+}
+
 .gaucheAfficher{
     width: 35%;
     min-height: 100vh;

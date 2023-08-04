@@ -5,11 +5,14 @@ import AddAdmin from '../Pages/AddAdmin/AddAdmin'
 import AddCellule from '../Pages/AddCellule/AddCellule'
 import AddDetenus from '../Pages/AddDetenus/AddDetenus'
 import AddPersonnel from '../Pages/AddPersonnel/AddPersonnel'
+import CelluleShow from '../Pages/CelluleShow/CelluleShow'
 import DemandeCongePers from '../Pages/DemandeCongePersonnel/DemandeCongePers'
 import HomePage from '../Pages/HomePage/HomePage'
 import ModifierConge from '../Pages/ModifieConge/ModifierConge'
 import ModifierIncident from '../Pages/ModifierIncident/ModifierIncident'
 import ModifierVisite from '../Pages/ModifierVisite/ModifierVisite'
+import ShowDetenus from '../Pages/ShowDetenus/ShowDetenus'
+import ShowDetenusIncident from '../Pages/ShowDetenusIncident/ShowDetenusIncident'
 import UseAdminPage from '../Pages/UseAdminPage/UseAdminPage'
 import UseAfficherAdmin from '../Pages/UseAfficherAdmin/UseAfficherAdmin'
 import UseAfficherPersonnels from '../Pages/UseAfficherPersonnels/UseAfficherPersonnels'
@@ -58,6 +61,9 @@ function PrivateRoot() {
             <Route path='/addAdmin' element={<AddAdmin/>}/>
             <Route path='/tousLesDetenus' element={<UserDetenusVisiteur/>}/>
             <Route path='/modifyIncident/:idUser' element={<ModifierIncident/>}/>
+            <Route path='/showDetenus/:id' element={<ShowDetenus/>}/>
+            <Route path='/showDetenusIncident/:id' element={<ShowDetenusIncident/>}/>
+            <Route path='/celluleShow/:id' element={<CelluleShow/>}/>
             <Route path='/modifyConge/:idUser' element={<ModifierConge/>}/>
             <Route path='/modifyVisite/:idUser' element={<ModifierVisite/>}/>
             <Route path='/afficherPersonnels/:idUser' element={<UseAfficherPersonnels/>}/>

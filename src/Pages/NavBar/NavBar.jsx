@@ -13,11 +13,11 @@ function NavBar() {
     const navigate = useNavigate();
     const [showNotification, setShowNotification] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Nouvel état
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false); 
+    const [notificationList, setNotifitionList] = useState([])
 
-
-
-    const {user} = useAuth()
+    const { socket } = useAuth();
+    const { user } = useAuth();
 
     const [dataUser, setDataUser] = useState([])
 
@@ -51,6 +51,32 @@ function NavBar() {
     const handleProfileClick = () => {
         setShowProfileDropdown(!showProfileDropdown);
     };
+
+    useEffect(()=>{
+        if(!socket)return
+
+        socket.emit('join-notification', {
+            me:user.id,
+        })
+
+        socket.on('new-notification', data=>{
+            console.log(notificationList)
+            setNotifitionList([...notificationList, data])
+        })
+
+    }, [socket])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/getNotification/${user.id}`);
+                setNotifitionList(response.data);
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        };
+        fetchData()
+    }, []);
 
     return (
         <div className="navContainer">
@@ -89,148 +115,22 @@ function NavBar() {
                     </div>
                     <div className="divContainerNotif">
                         
-                        <Link to={'/'}>
+                    {notificationList.map((item, index) => {
+                        <Link to={`/${item.link}`}>
                             <div className="contenueNotif">
                                 <div className="coucheContenue">
                                     <div className="imageNotif">
-                                        <img src={aina}/>
+                                        <img src={`http://localhost:5000/images/${item.sender.image}`}/>
                                     </div>
                                     <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
+                                        <h6>{item.sender.nom}</h6>
+                                        <p>{item.message}</p>
                                     </div>
                                 </div>
                             </div>
                         </Link>
+                    })}
 
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-
-                        <Link to={'/'}>
-                            <div className="contenueNotif">
-                                <div className="coucheContenue">
-                                    <div className="imageNotif">
-                                        <img src={aina}/>
-                                    </div>
-                                    <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
 
                     </div>
                 </div>

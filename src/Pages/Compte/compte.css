@@ -19,6 +19,32 @@
     background: var(--black);   
 }
 
+.modPass{
+    display: flex;
+    justify-content: right;
+    margin-right: 20px;
+}
+.modPass button{
+    border: 1px solid var(--dark2);
+    background: var(--dark2);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modPass button:hover{
+    border: 0.1px solid var(--orange);
+    background: var(--dark);
+}
+.modPass button img{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    object-position: center;
+}
+
 .gaucheCompte .divTitreCompte{
     display: flex;
     flex-direction: column;
@@ -199,5 +225,36 @@
 .inputBtn input{
     display: none;
 }
+
+
+.divContainerIput{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.divInputM{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.divInputM label{
+    font-size: var(--font2);
+    margin-left: 10px;
+}
+.divInputM input{
+    border: none;
+    height: 45px;
+    background: var(--black);
+    border-radius: 10px;
+    padding-left: 10px;
+    color: var(--gray);
+}
+
+.divInputM input:focus{
+    outline: none;
+}
+
 
 

@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import errorIcon from "../../Outils/icon/error.ico";
+import password from "../../Outils/icon/password.ico";
 import { useAuth } from '../../hooks/useAuth';
+import Modal from 'react-modal'; 
+import { ToastContainer, toast} from 'react-toastify';
 
 import "./compte.css"
 
@@ -171,12 +174,57 @@ function Compte() {
 
 
 // ! **********************************************
+    const [modalIsOpenReff, setModalIsOpenReff] = useState(false);
+    const [errorsPass, setErrorsPass] = useState('')
+
+
+
+    const [values, setValues] = useState({
+        userId: user.id,
+        motdepasseActuel: "",
+        nouveauPass: "",
+        confirmPass: ""
+    })
+
+    const closeModalReff = () => {
+        setModalIsOpenReff(false);
+    };
+
+    const openModalReff = () => {
+        setModalIsOpenReff(true);
+    };
+
+    const handleSubmitPass = (e) => {
+        e.preventDefault()
+        console.log(values)
+        axios.post(`http://localhost:5000/modifierMotdepasseCompte`, values)
+            .then(response => {
+                closeModalReff(); 
+                toast.success('Le mot de passe a été modifié avec succès!', {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: 'dark'
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                if (err.response.status === 401) {
+                    setErrorsPass(err.response.data);
+                }
+            });
+    };
+
+
+
+// ! **********************************************
 
     return (
         <div className='corpHome'>
             <div className="gaucheCompte">
                 <div className="divTitreCompte">
                     <p>Modifier mon profil</p>
+                </div>
+                <div className='modPass'>
+                    <button onClick={() => {openModalReff(); }}><img src={password}/></button>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="divContenueCompte">
@@ -257,8 +305,62 @@ function Compte() {
                     </div>
                 </div>
             </div>
+            <Modal
+                isOpen={modalIsOpenReff}
+                onRequestClose={closeModalReff}
+                contentLabel="Confirmation Modal"
+                className="Modal"
+                overlayClassName="ModalOverlay" 
+                style={{
+                    content: {
+                        width: "400px", 
+                        margin: "auto", 
+                    },
+                }}
+                >
+                <h3>Mettre a jour votre mot de passe</h3>
+                <br />
+                <hr className="hr" />
+                <form onSubmit={handleSubmitPass}>
+                <div className="divContainerIput">
+                    <br />
+                    <div className="divInputM">
+                        <label>Mot de passe actuel:</label>
+                        <input type="password" placeholder='...' onChange={e => setValues({...values, motdepasseActuel: e.target.value})}/>
+                    </div>
+                    <div className="divInputM">
+                        <label>Nouveau mot de passe:</label>
+                        <input type="password" placeholder='...' onChange={e => setValues({...values, nouveauPass: e.target.value})}/>
+                    </div>
+                    <div className="divInputM">
+                        <label>Confirmation du nouveau mot de passe:</label>
+                        <input type="password" placeholder='...' onChange={e => setValues({...values, confirmPass: e.target.value})}/>
+                    </div>
+                    <br />
+                </div>
+                    {
+                        errorsPass && errorsPass.length > 0 && (
+                        <div className="errors">
+                            <div className="errorIcon">
+                                <img src={errorIcon} alt="erreur" />
+                            </div>
+                            <div className="errorText">
+                            <p style={{ fontSize: '15px' }}>{errorsPass}</p>
+                            </div>
+                        </div>
+                        )
+                    }
+                <hr className="hr" />
+                <div className='modalActions'>
+                    <button type="submit" className="ok">Modifier</button>
+                    <button onClick={closeModalReff} className="annuler">Annuler</button>
+                </div>
+                </form>
+            </Modal>
         </div>
     )
 }
+
+Modal.setAppElement('#root');
 
 export default Compte
