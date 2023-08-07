@@ -18,6 +18,15 @@ function MonDetenusVisiteurs() {
     const [idVis, setIdVis] = useState(null);
     const navigate = useNavigate();
 
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);                                                                                           
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const minDate = `${year}-${month}-${day}`;
+
     const {user} = useAuth()
 
     const handleSearchChange = (event) => {
@@ -160,22 +169,22 @@ function MonDetenusVisiteurs() {
                         <form onSubmit={handleFormSubmit}>
                             <div className="inputModal">
                                 <label className='label'>Date de visite:</label>
-                                <input className='input' type="date" id="date" onChange={e => setValues({ ...values, dateVisite: e.target.value })} />;
+                                <input className='input' type="date" id="date" min={minDate} onChange={e => setValues({ ...values, dateVisite: e.target.value })} />;
                                 <label className='label'>Description:</label>
                                 <input className='input' type="text" placeholder='...' id="description" onChange={e => setValues({ ...values, description: e.target.value })} />
                                 <br />
                                 <label className='label'>Heure de visite:</label>
-                                <input className='input' type="hore" id="date" onChange={e => setValues({ ...values, heure: e.target.value })} />; 
+                                <input className='input' type="time" id="heure" onChange={e => setValues({ ...values, heure: e.target.value })} />;
                             </div>
                             <br />
                             {
                                 errors && errors.length > 0 && (
                                 <div className="errors">
                                     <div className="errorIcon">
-                                    <img src={errorIcon} alt="erreur" />
+                                        <img src={errorIcon} alt="erreur" />
                                     </div>
                                     <div className="errorText">
-                                    <p>{errors}</p>
+                                        <p>{errors}</p>
                                     </div>
                                 </div>
                                 )

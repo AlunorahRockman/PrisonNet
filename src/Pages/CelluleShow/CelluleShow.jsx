@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import NavBar from '../NavBar/NavBar'
 import { useAuth } from '../../hooks/useAuth';
+import errorIcon from "../../Outils/icon/error.ico";
+
 
 import "./celluleShow.css"
 
@@ -21,6 +23,9 @@ function CelluleShow() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [searchValueDetenus, setSearchValueDetenus] = useState('');
     const [selectedItemIdAjouter, setSelectedItemIdAjouter] = useState(null);
+
+
+    const [errors, setErrors] = useState([]);
 
 
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -52,6 +57,7 @@ function CelluleShow() {
     
     const handleModalCloseAjouter = () => {
         setSelectedItemIdAjouter(null);
+        setErrors(null)
     };
 
     const [valuesAjouter, setValuesAjouter] = useState({
@@ -76,6 +82,9 @@ function CelluleShow() {
         })
         .catch(err => {
             console.log(err);
+            if (err.response.status === 401) {
+                setErrors(err.response.data);
+            }
         });
     };
 
@@ -178,26 +187,27 @@ function CelluleShow() {
                             )
                         )
                         .map((item, index) =>
-                            <div key={index} className="contenuePrisonnier">
-                                <div className="imagePrisonnier">
-                                    <img src={`http://localhost:5000/images/${item.image}`}/>
-                                </div>
-                                <div className="titrePrisonnier">
-                                    <div className="divHorizontal">
-                                        <p>{item.nom}</p>
-                                        <h5>{item.dateFin}</h5>
+                                <div key={index} className="contenuePrisonnier">
+                                    <div className="imagePrisonnier">
+                                    <img src={`http://localhost:5000/images/${item.image}`} className={item.statut === 2 ? 'exited-image' : ''}/>
+                                        {item.statut === 2 && <p className="exit-message">Sorti de la prison</p>}
+                                        {item.statut === 3 && <p className="exit-messageD">Décédé</p>}
+                                        {item.statut === 4 && <p className="exit-messageE">Evasion</p>}
                                     </div>
-                                    <hr className='hr' />
-                                    <h6>{item.adresse}</h6>
+                                    <div className="titrePrisonnier">
+                                        <div className="divHorizontal">
+                                            <p>{item.nom}</p>
+                                            <h5>{item.dateFin}</h5>
+                                        </div>
+                                        <hr className='hr' />
+                                        <h6>{item.adresse}</h6>
+                                    </div>
+                                    <div className="buttonPrisonnier">
+                                        <button className='buttonIray' disabled={item.statut === 2 || item.statut === 3} onClick={() => handleModalOpenAjouter(item.id)}>Ajouter</button>
+                                    </div>
                                 </div>
-                                <div className="buttonPrisonnier">
-                                    <button className='buttonIray' onClick={() => handleModalOpenAjouter(item.id)}>Ajouter</button>
-                                </div>
-                            </div>
-
-                        )
-                    }
-
+                            )
+                        }
                         </div>
                     </div>
                 </div>
@@ -210,9 +220,22 @@ function CelluleShow() {
                         </div>
                         <br />
                         <hr className='hr'/>
-                        <div className='divConfirmation'>
-                            <p>Vous voullez vraiement ajouter cette détenus dans ce cellule?</p>
-                        </div>
+                        {
+                                errors && errors.length > 0 ? (
+                                    <div className="errors">
+                                        <div className="errorIcon">
+                                            <img src={errorIcon} alt="erreur" />
+                                        </div>
+                                        <div className="errorText">
+                                            <p>{errors}</p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className='divConfirmation'>
+                                        <p>Vous voullez vraiement ajouter cette détenus dans ce cellule?</p>
+                                    </div>
+                                )
+                        }
                         <form onSubmit={handleFormSubmit}>
                             <hr className='hr' />
                             <div className="modal-buttons">

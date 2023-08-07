@@ -64,7 +64,7 @@ function ModifierIncident() {
                     <input type="text"   value={updatedIncident.description || ''}
                         onChange={(e) => setUpdatedIncident({ ...updatedIncident, description: e.target.value })}  placeholder='...' id="description"/>
                     <label>Date:</label>
-                    <input type="date" value={updatedIncident.date || ''}
+                    <input type="date" value={updatedIncident.date || ''} max={new Date().toISOString().split('T')[0]}
                         onChange={(e) => setUpdatedIncident({ ...updatedIncident, date: e.target.value })}  id="date"/>
 
                     {

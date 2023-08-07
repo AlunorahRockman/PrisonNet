@@ -6,3 +6,11 @@
 .divConfirmation{
     color: var(--gray);
 }
+
+.divBouton{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

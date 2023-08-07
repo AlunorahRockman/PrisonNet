@@ -17,7 +17,8 @@ function PrisonniersPage() {
 
     useEffect(() => {
         const fetchData=async ()=>{ 
-            let resultat = await axios.get(`http://localhost:5000/detenus`)
+            await axios.get(`http://localhost:5000/metreAjourStatut`);
+            let resultat = await axios.get(`http://localhost:5000/detenus`)    
             resultat = await resultat.data;
             setData(resultat)
         }
@@ -55,7 +56,10 @@ function PrisonniersPage() {
                         ).map((item, index) =>                 
                             <div key={index} className="contenuePrisonnier">
                                 <div className="imagePrisonnier">
-                                    <img src={`http://localhost:5000/images/${item.image}`}/>
+                                    <img src={`http://localhost:5000/images/${item.image}`} className={item.statut === 2 ? 'exited-image' : ''}/>
+                                    {item.statut === 2 && <p className="exit-message">Sorti de la prison</p>}
+                                    {item.statut === 3 && <p className="exit-messageD">Décédé</p>}
+                                    {item.statut === 4 && <p className="exit-messageE">Evasion</p>}
                                 </div>
                                 <div className="titrePrisonnier">
                                     <div className="divHorizontal">

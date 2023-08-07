@@ -11,7 +11,7 @@ function AddCellule() {
 
     
     const [values, setValues] = useState({
-        numero: "",
+        nom: "",
         capaciteMax: "",
         superficie: "",
         statut: 1,
@@ -37,12 +37,12 @@ function AddCellule() {
         <div className="containerAddPers">
             <h1>Ajouter une cellule</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="numero">Numéro unique:</label>
+                <label htmlFor="numero">Nom du cellule:</label>
                     <input
                     type="text"
-                    id="numero"
-                    name="numero"
-                    onChange={e => setValues({ ...values, numero: e.target.value })}
+                    id="nom"
+                    name="nom"
+                    onChange={e => setValues({ ...values, nom: e.target.value })}
                     placeholder='...'
                     />
                 <label htmlFor="max">Capacité maximal:</label>

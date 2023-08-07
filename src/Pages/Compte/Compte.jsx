@@ -249,7 +249,7 @@ function Compte() {
                     </div>
                     <div className="divContenueCompte">
                         <label htmlFor="dateNaissance">Date de Naissance</label>
-                        <input type="date" value={dateNaissance} onChange={(e) => setDateNaissance(e.target.value)}  id='dateNaissance'/>
+                        <input type="date" value={dateNaissance} max={new Date().toISOString().split('T')[0]} onChange={(e) => setDateNaissance(e.target.value)}  id='dateNaissance'/>
                     </div>
                     <div className="divContenueCompte">
                         <label htmlFor="phone">Numéro de Téléphone</label>

@@ -18,7 +18,7 @@ function CellulesPage() {
 
     const [selectedItemId, setSelectedItemId] = useState(null);
 
-    const [numero, setNumero] = useState(null)
+    const [nom, setNom] = useState(null)
     const [capaciteMax, setCapaciteMax] = useState(null)
     const [superficie, setSuperficie] = useState(null)
     const [status, setStatus] = useState(null)
@@ -28,7 +28,7 @@ function CellulesPage() {
     const handleModalOpen = (itemId) => {
         setSelectedItemId(itemId);
         const dataObject = data.find(item => item.id === itemId);
-        setNumero(dataObject.numero)
+        setNom(dataObject.nom)
         setCapaciteMax(dataObject.capaciteMax)
         setSuperficie(dataObject.superficie)
         setStatus(dataObject.statut)
@@ -42,7 +42,7 @@ function CellulesPage() {
     const updateCellule = async () => {
         
         const updatedCell = {
-            numero: numero,
+            nom: nom,
             capaciteMax: capaciteMax,
             superficie: superficie,
             statut: status,
@@ -138,7 +138,7 @@ function CellulesPage() {
                         <thead>
                             <tr>
                                 <td></td>
-                                <td>Numero</td>
+                                <td>Nom</td>
                                 <td>Capacité maximal</td>
                                 <td>Superficie</td>
                                 <td>Statut</td>
@@ -149,14 +149,14 @@ function CellulesPage() {
                         {
                             data
                             .filter((item) =>
-                                String(item.numero).toLowerCase().includes(searchValue.toLowerCase()) ||
+                                String(item.nom).toLowerCase().includes(searchValue.toLowerCase()) ||
                                 String(item.capaciteMax).toLowerCase().includes(searchValue.toLowerCase()) ||
                                 String(item.superficie).toLowerCase().includes(searchValue.toLowerCase()) ||
                                 (item.statut === 1 ? "Libre" : "Occupé").toLowerCase().includes(searchValue.toLowerCase())
                             ).map((item, index) => 
                                 <tr key={index}>
                                     <td><Link to={`/celluleShow/${item.id}`}><button className='detailBtn'><img className='img' src={entrerIcon}/></button></Link></td>
-                                    <td>{item.numero}</td>
+                                    <td>{item.nom}</td>
                                     <td>{item.capaciteMax} Détenus</td>
                                     <td>{item.superficie} m<sup>2</sup></td>
                                     <td>{item.statut === 1 ? "Libre" : "Occupé"}</td>
@@ -194,7 +194,7 @@ function CellulesPage() {
                         <form onSubmit={handleFormSubmit}>
                             <div className="inputModal">
                                 <label>Numéro</label>
-                                <input value={numero} onChange={(e) => setNumero(e.target.value)} type="number"/>
+                                <input value={nom} onChange={(e) => setNom(e.target.value)} type="text"/>
                                 <label>Capacité maximal</label>
                                 <input value={capaciteMax} onChange={(e) => setCapaciteMax(e.target.value)} type="number"/>
                                 <label>Superficie</label>

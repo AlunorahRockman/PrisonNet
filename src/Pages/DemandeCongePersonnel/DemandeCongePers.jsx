@@ -25,18 +25,10 @@ function DemandeCongePers() {
             }
     };
         fetchdata();
-    }, []);
+    }, [user.id]);
 
     console.log(idPers)
 
-    
-    const [values, setValues] = useState({
-        personnelId: "",
-        date: "",
-        dateFin: "",
-        motif: "",
-        status: 0
-    });
 
     useEffect(() => {
         if (idPers !== null) {
@@ -46,7 +38,18 @@ function DemandeCongePers() {
             }));
         }
     }, [idPers]);
-    console.log(values)
+
+
+
+    
+    const [values, setValues] = useState({
+        personnelId: null,
+        date: "",
+        dateFin: "",
+        motif: "",
+        status: 0
+    });
+
 
 
     const handleSubmit = (e) => {
@@ -75,6 +78,7 @@ function DemandeCongePers() {
                     type="date"
                     id="date"
                     name="date"
+                    min={new Date().toISOString().split('T')[0]}
                     onChange={e => setValues({ ...values, date: e.target.value })}
                     placeholder='...'
                     />
@@ -83,6 +87,7 @@ function DemandeCongePers() {
                     type="date"
                     id="dateFin"
                     name="dateFin"
+                    min={new Date().toISOString().split('T')[0]}
                     onChange={e => setValues({...values, dateFin: e.target.value})}
                     placeholder='...'
                     />

@@ -30,6 +30,15 @@ function ModifierVisite() {
             });
     };
 
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);                                                                                           
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+
+    const minDate = `${year}-${month}-${day}`;
+
 
     useEffect(() => {
         const fetchConge = async () => {
@@ -69,6 +78,7 @@ function ModifierVisite() {
                 type="date"
                 id="dateFin"
                 name="dateFin"
+                min={minDate} 
                 value={updatedVisite.dateVisite || ''}
                 onChange={(e) => setUpdatedVisite({ ...updatedVisite, dateVisite: e.target.value })} 
                 placeholder='...'
@@ -85,7 +95,7 @@ function ModifierVisite() {
 
             <label htmlFor="super">Heure de visite:</label>
                 <input
-                type="text"
+                type="time"
                 id="heure"
                 name="heure"
                 value={updatedVisite.heure || ''}

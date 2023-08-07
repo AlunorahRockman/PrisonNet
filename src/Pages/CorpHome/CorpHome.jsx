@@ -20,9 +20,10 @@ import "./corpHome.css"
 import personnelIconN from "../../Outils/icon/personnelN.ico";
 import congeIconN from "../../Outils/icon/congeN.ico";
 import prisonnierIconN from "../../Outils/icon/prisonierN.ico";
+import taskIcon from "../../Outils/icon/task.ico";
+import taskDayIcon from "../../Outils/icon/taskDay.ico";
 import celluleIconN from "../../Outils/icon/celluleN.ico";
 import visiteurIconN from "../../Outils/icon/visiteurN.ico";
-import modifierIcon from "../../Outils/icon/modify.ico";
 import { useAuth } from '../../hooks/useAuth';
 import { FaSearch } from 'react-icons/fa';
 
@@ -217,6 +218,11 @@ function CorpHome() {
         setShowConfirmation(true);
     };
 
+    function formatTime(timeString) {
+        const [hours, minutes] = timeString.split(":");
+        return `${hours}h ${minutes}`;
+    }
+
     const confirmDeleteConge = () => {
         axios.delete(`http://localhost:5000/deleteConge/${selectedConge.id}`)
         .then(response => {
@@ -272,7 +278,7 @@ function CorpHome() {
                         <Link to={"/congePage"}>
                             <div className="contenue">
                                 <img className='image' src={congeIcon}/>
-                                <p>Congées</p>
+                                <p>Congés</p>
                             </div>
                         </Link>
                         <Link to={"/prisonniersPage"}>
@@ -293,10 +299,22 @@ function CorpHome() {
                                 <p>Visites</p>
                             </div>
                         </Link>
+                        <Link to={"/tachesPage"}>
+                            <div className="contenue">
+                                <img className='image' src={taskIcon}/>
+                                <p>Tâches</p>
+                            </div>
+                        </Link>
                         <Link to={"/visiteursPage"}>
                             <div className="contenue">
                                 <img className='image' src={visiteurIcon}/>
                                 <p>Visiteurs</p>
+                            </div>
+                        </Link>
+                        <Link to={"/tachesQuotidPage"}>
+                            <div className="contenue">
+                                <img className='image' src={taskDayIcon}/>
+                                <p>Tâches Quotidiennes</p>
                             </div>
                         </Link>
                         <Link to={"/incidentPage"}>
@@ -330,7 +348,7 @@ function CorpHome() {
                                     <img className='imageGrang' src={congeIconN}/>
                                 </div>
                                 <div className="textBox">
-                                    <h2>Congées en cours</h2>
+                                    <h2>Congés en cours</h2>
                                     <p>{congeEnCoursCount}</p>
                                 </div>
                             </div>
@@ -475,8 +493,11 @@ function CorpHome() {
                                                     </div>
                                                     <div className="textCongee">
                                                         <div className='top'>
-                                                            <h5><span>Date :</span> {item.dateVisite.substring(0, 10)} <span 
-                                                        className='espace'>Heure :</span> à {item.heure} h</h5>
+                                                        <h5>
+                                                            <span>Date:</span> {item.dateVisite.substring(0, 10)}{" "}
+                                                            <span className='espace'>Heure :</span>{" "}
+                                                            à {formatTime(item.heure)}
+                                                        </h5>
                                                         </div>
                                                         <div className='motif'>
                                                             <h5><span>Description: </span></h5>
@@ -490,18 +511,18 @@ function CorpHome() {
 
                                                         </div>
                                                         {
-                                                        showMenu && selectedItem && (
-                                                            <div className="menu-overlay">
-                                                                <div className="menu-container">
-                                                                    <Link to={`/modifyVisite/${item.id}`} className="menu-option">
-                                                                        <FaEdit className="menu-icon" />
-                                                                    </Link>
-                                                                    <div className="menu-option" onClick={() => handleDeleteVisite(item.id)}>
-                                                                        <FaTrash className="menu-icon" />
+                                                            showMenu && selectedItem && (
+                                                                <div className="menu-overlay">
+                                                                    <div className="menu-container">
+                                                                        <Link to={`/modifyVisite/${item.id}`} className="menu-option">
+                                                                            <FaEdit className="menu-icon" />
+                                                                        </Link>
+                                                                        <div className="menu-option" onClick={() => handleDeleteVisite(item.id)}>
+                                                                            <FaTrash className="menu-icon" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        )
+                                                            )
                                                         }
                                                         <div className="menu" onClick={() => { setShowMenu(!showMenu); setSelectedItem(item); }}>
                                                             <p>...</p>
@@ -510,7 +531,7 @@ function CorpHome() {
                                                     {
                                                         item.statut === 2 ? (
                                                             <div className="motifReff">
-                                                                <p>REFFUSE</p>
+                                                                <p>REFUSE</p>
                                                             </div>
                                                         ) : item.statut === 1 ? (
                                                             <div className="motifAcc">

@@ -24,6 +24,8 @@ function ListeDetenusVisiteur() {
     };
 
 
+    const [errorsC, setErrorsC] = useState([]);
+
     useEffect(() => {
         const fetchdata = async () => {
             let resultat = await axios.get(`http://localhost:5000/getIdVisiteur/${user.id}`);
@@ -100,6 +102,9 @@ function ListeDetenusVisiteur() {
         })
         .catch(err => {
             console.log(err);
+            if (err.response.status === 401) {
+                setErrorsC(err.response.data);
+            }
         });
     };
 
@@ -175,8 +180,14 @@ function ListeDetenusVisiteur() {
                             <td>{item.dureePeine} <span>ans</span></td>
                             <td>{item.dateVenue.substring(0, 10)}</td>
                             <td className='tdButton'>
-                                <button className='btnKely' onClick={() => handleModalOpenPrendre(item.id)}>Prendre</button>
-                                <button className='btnKely' onClick={() => handleModalOpen(item.id)}>Soisir</button>
+                            {
+                                (item.statut === 1 || item.statut === 4) && (
+                                    <div className='divBouton'>
+                                        <button className='btnKely' onClick={() => handleModalOpenPrendre(item.id)}>Prendre</button>
+                                        <button className='btnKely' onClick={() => handleModalOpen(item.id)}>Soisir</button>
+                                    </div>
+                                )
+                            }
                             </td>
                             </tr>
                         )
@@ -198,7 +209,7 @@ function ListeDetenusVisiteur() {
                                 <label>Description:</label>
                                 <input type="text" placeholder='...' id="description" onChange={e => setValues({ ...values, description: e.target.value })} />
                                 <label>Date:</label>
-                                <input type="date" id="date" onChange={e => setValues({ ...values, date: e.target.value })} />
+                                <input type="date" id="date" max={new Date().toISOString().split('T')[0]} onChange={e => setValues({ ...values, date: e.target.value })} />
                             </div>
                             <br />
                             {
@@ -231,9 +242,22 @@ function ListeDetenusVisiteur() {
                         </div>
                         <br />
                         <hr className='hr'/>
-                        <div className='divConfirmation'>
-                            <p>Vous voullez vraiement prendre cette détenus pour vous?</p>
-                        </div>
+                        {
+                                errorsC && errorsC.length > 0 ? (
+                                    <div className="errors">
+                                        <div className="errorIcon">
+                                            <img src={errorIcon} alt="erreur" />
+                                        </div>
+                                        <div className="errorText">
+                                            <p>{errorsC}</p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className='divConfirmation'>
+                                        <p>Vous voullez vraiement prendre cette détenus pour vous?</p>
+                                    </div>
+                                )
+                        }
                         <form onSubmit={handleFormSubmitPrendre}>
                             <hr className='hr' />
                             <div className="modal-buttons">

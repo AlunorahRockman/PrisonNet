@@ -20,12 +20,28 @@ function AuthProvider({children}){
 
     useEffect(() => {
         const socketInstance = io("http://localhost:5000");
+
+        if(user){
+            socketInstance.emit('join-chat', {
+            me:user.id,
+        })
+        }
+
+        socketInstance.on('reconnect', (attemptNumber) => {
+            console.log(`Socket reconnected after attempt ${attemptNumber}`);
+            if (user) {
+                socketInstance.emit('join-chat', {
+                    me: user.id,
+                });
+            }
+        });
+
         setSocket(socketInstance);
 
         return () => {
             socketInstance.disconnect();
         };
-    }, []);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={

@@ -97,7 +97,7 @@ function CongeAdminPage() {
             <div className="gauchePers">
                 <div className="coucheGauche">
                     <div className="titreConge">
-                        <p>Congées</p>
+                        <p>Congés</p>
                     </div>
                     <div className="rechercherDiv">
                         <input type="text" value={searchValue} onChange={handleSearchChange} placeholder='Rechercher...'/>
@@ -146,13 +146,13 @@ function CongeAdminPage() {
                                 {
                                     item.status === 2 ? (
                                         <div className='coucheBtn'>
-                                            <button className='acceptBtn' onClick={() => { setCongeIdToUpdate(item.id); openModal(); }}>Accépter</button>
+                                            {/* <button className='acceptBtn' onClick={() => { setCongeIdToUpdate(item.id); openModal(); }}>Accépter</button> */}
                                             <p>Reffusé</p>
                                         </div>
                                     ) : item.status === 1 ? (
                                         <div className='coucheBtn'>
                                             <p>Accepté</p>
-                                            <button className='reffusBtn' onClick={() => { setCongeIdToUpdateReff(item.id); openModalReff(); }}>Réffuser</button>
+                                            {/* <button className='reffusBtn' onClick={() => { setCongeIdToUpdateReff(item.id); openModalReff(); }}>Réffuser</button> */}
                                         </div>
                                     ) : (
                                         <div className='coucheBtn'>

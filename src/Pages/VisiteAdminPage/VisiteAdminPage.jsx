@@ -145,18 +145,18 @@ function VisiteAdminPage() {
                                 {
                                     item.statut === 2 ? (
                                         <div className='coucheBtn'>
-                                            <button className='acceptBtn' onClick={() => { setVisiteIdToUpdate(item.id); openModal(); }}>Accépter</button>
-                                            <p>Reffusé</p>
+                                            {/* <button className='acceptBtn' onClick={() => { setVisiteIdToUpdate(item.id); openModal(); }}>Accépter</button> */}
+                                            <p>Refusé</p>
                                         </div>
                                     ) : item.statut === 1 ? (
                                         <div className='coucheBtn'>
                                             <p>Accepté</p>
-                                            <button className='reffusBtn' onClick={() => { setVisiteIdToUpdateReff(item.id); openModalReff(); }}>Réffuser</button>
+                                            {/* <button className='reffusBtn' onClick={() => { setVisiteIdToUpdateReff(item.id); openModalReff(); }}>Réffuser</button> */}
                                         </div>
                                     ) : (
                                         <div className='coucheBtn'>
                                             <button className='acceptBtn' onClick={() => { setVisiteIdToUpdate(item.id); openModal(); }}>Accépter</button>
-                                            <button className='reffusBtn' onClick={() => { setVisiteIdToUpdateReff(item.id); openModalReff(); }}>Réffuser</button>
+                                            <button className='reffusBtn' onClick={() => { setVisiteIdToUpdateReff(item.id); openModalReff(); }}>Réfuser</button>
                                         </div>
                                     )
                                 }

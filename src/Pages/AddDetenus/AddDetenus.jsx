@@ -22,7 +22,7 @@ function AddDetenus() {
         dateVenue: "",
         raison: "",
         image: "detenus.jpg",
-        statut: 0,
+        statut: 1,
     });
 
     const handleSubmit = (e) => {
@@ -79,41 +79,42 @@ function AddDetenus() {
 
                 <label htmlFor="dateNaissance">Date de naissance:</label>
                     <input
-                    type="date"
-                    id="dateNaissance"
-                    name="dateNaissance"
-                    onChange={e => setValues({...values, dateNaissance: e.target.value})}
-                    placeholder='...'
+                        type="date"
+                        id="dateNaissance"
+                        name="dateNaissance"
+                        onChange={e => setValues({...values, dateNaissance: e.target.value})}
+                        max={new Date().toISOString().split('T')[0]}
+                        placeholder='...'
                     />
 
                     
                 <label htmlFor="sexe">Sexe:</label>
                     <input
-                    type="text"
-                    id="sexe"
-                    name="sexe"
-                    onChange={e => setValues({...values, sexe: e.target.value})}
-                    placeholder="M/F"
+                        type="text"
+                        id="sexe"
+                        name="sexe"
+                        onChange={e => setValues({...values, sexe: e.target.value})}
+                        placeholder="M/F"
                     /> 
 
 
                 <label htmlFor="nation">Nationnalité:</label>
                     <input
-                    type="text"
-                    id="nation"
-                    name="nation"
-                    onChange={e => setValues({...values, nationnalite: e.target.value})}
-                    placeholder="..."
+                        type="text"
+                        id="nation"
+                        name="nation"
+                        onChange={e => setValues({...values, nationnalite: e.target.value})}
+                        placeholder="..."
                     />
 
 
                 <label htmlFor="salaire">Durée de Paine:</label>
                     <input
-                    type="number"
-                    id="salaire"
-                    name="salaire"
-                    onChange={e => setValues({...values, dureePeine: e.target.value})}
-                    placeholder='...'
+                        type="number"
+                        id="salaire"
+                        name="salaire"
+                        onChange={e => setValues({...values, dureePeine: e.target.value})}
+                        placeholder='...'
                     />
 
 
@@ -124,6 +125,7 @@ function AddDetenus() {
                     id="dateNaissance"
                     name="dateNaissance"
                     onChange={e => setValues({...values, dateVenue: e.target.value})}
+                    max={new Date().toISOString().split('T')[0]}
                     placeholder='...'
                     />
 

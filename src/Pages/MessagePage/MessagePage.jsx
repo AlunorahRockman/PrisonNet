@@ -24,7 +24,6 @@ function MessagePage() {
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [roomId, setRoomId]=useState()
-    const [roomIdNotif, setRoomIdNotif]=useState()
 
     const [currentMessage, setCurrentMessage] = useState()
     const [messageList, setMessageList] = useState([])
@@ -133,7 +132,7 @@ function MessagePage() {
             }
 
             socket.emit("send_notification", {
-                roomId: roomIdNotif,
+                roomId: roomId,
                 content: notificationData
             })
     }

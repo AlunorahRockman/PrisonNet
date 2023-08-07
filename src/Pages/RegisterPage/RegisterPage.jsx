@@ -114,7 +114,9 @@ function RegisterPage() {
                             <hr className='hr' />
                             <div className="inputRegister">
                                 <label htmlFor="date">Date de naissance</label>
-                                <input className='inputInterne' type="date" id='date' onChange={e => setValues({...values, dateNaissance: e.target.value})} placeholder='...' />
+                                <input className='inputInterne' type="date" id='date' 
+                                onChange={e => setValues({...values, dateNaissance: e.target.value})}
+                                max={new Date().toISOString().split('T')[0]} placeholder='...' />
                             </div>
                             <hr className='hr' />
                             <div className="inputRegister">

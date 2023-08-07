@@ -19,3 +19,8 @@
     color: var(--orange);
 }
 
+.errorText p{
+    color: var(--red);
+}
+
+

@@ -103,20 +103,21 @@ function AddAdmin() {
 
                 <label htmlFor="dateNaissance">Date de naissance:</label>
                     <input
-                    type="date"
-                    id="dateNaissance"
-                    name="dateNaissance"
-                    onChange={e => setValues({...values, dateNaissance: e.target.value})}
-                    placeholder='...'
+                        type="date"
+                        id="dateNaissance"
+                        name="dateNaissance"
+                        onChange={e => setValues({...values, dateNaissance: e.target.value})}
+                        max={new Date().toISOString().split('T')[0]}
+                        placeholder='...'
                     />
 
                 <label htmlFor="phone">Téléphone:</label>
                     <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    onChange={e => setValues({...values, phone: e.target.value})}
-                    placeholder='...'
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        onChange={e => setValues({...values, phone: e.target.value})}
+                        placeholder='...'
                     />
 
                 <label htmlFor="sexe">Sexe:</label>

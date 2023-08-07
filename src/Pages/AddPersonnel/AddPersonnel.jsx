@@ -165,6 +165,7 @@ function AddPersonnel() {
                     id="dateNaissance"
                     name="dateNaissance"
                     onChange={e => setValues({...values, dateNaissance: e.target.value})}
+                    max={new Date().toISOString().split('T')[0]}
                     placeholder='...'
                     />
 

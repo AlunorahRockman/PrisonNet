@@ -13,13 +13,25 @@ import "../NavBar/navBar.css"
 function NavBarMessage() {
     const [showNotification, setShowNotification] = useState(false);
     const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-    const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Nouvel état
+    const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+    const [notificationList, setNotifitionList] = useState([])
+
+    const { socket } = useAuth();
+    const { user } = useAuth();
 
     const handleNotificationClick = () => {
         setShowNotification(!showNotification);
     };
 
-    const {user} = useAuth()
+    useEffect(() => {
+        const fetchData = async () => {
+            let response = await axios.get(`http://localhost:5000/getNotification/${user.id}`);
+            response = await response.data;
+            setNotifitionList(response)
+            console.log(notificationList)
+        };
+        fetchData()
+    }, [user.id]);
 
     const [dataUser, setDataUser] = useState([])
 
@@ -50,6 +62,20 @@ function NavBarMessage() {
     const handleProfileClick = () => {
         setShowProfileDropdown(!showProfileDropdown);
     };
+
+    useEffect(() => {
+        if (!socket) return;
+    
+        socket.on('new-notification', data => {
+            console.log(data);
+            setNotifitionList(notifications => {
+                const newNotificationList = [data, ...notifications];
+                return newNotificationList;
+            });
+        });
+    
+    }, [socket]);
+    
 
     return (
         <div className="navContainer">
@@ -82,20 +108,23 @@ function NavBarMessage() {
                         <hr className='hr' />
                     </div>
                     <div className="divContainerNotif">
-{/*                         
-                        <Link to={'/'}>
+
+
+                    {notificationList.map((notification, index) => (
+                        <Link key={index} to={`${notification.link}`}>
                             <div className="contenueNotif">
                                 <div className="coucheContenue">
                                     <div className="imageNotif">
-                                        <img src={aina}/>
+                                        <img src={`http://localhost:5000/images/${notification.senderNotif.image}`}/>
                                     </div>
                                     <div className="descriptionNotif">
-                                        <h6>Alunorah Aina</h6>
-                                        <p>Nangataka angataka angataka angataka angatakacongé ity namana iray ity</p>
+                                        <h6>{notification.senderNotif.nom}</h6>
+                                        <p>{notification.message}</p>
                                     </div>
                                 </div>
                             </div>
-                        </Link> */}
+                        </Link>
+                    ))}
 
 
                     </div>

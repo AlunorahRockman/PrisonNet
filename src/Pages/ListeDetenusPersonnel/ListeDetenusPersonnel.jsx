@@ -132,7 +132,12 @@ function ListeDetenusPersonnel() {
                             <td>{item.dureePeine} <span>ans</span></td>
                             <td>{item.dateVenue.substring(0, 10)}</td>
                             <td>
-                                <button className='btnKely' onClick={() => handleModalOpen(item.id)}>Soisir</button>
+                            {
+                                (item.statut === 1 || item.statut === 4) && (
+                                    <button className='btnKely' onClick={() => handleModalOpen(item.id)}>Soisir</button>
+                                )
+                            }
+
                             </td>
                             </tr>
                         )
@@ -154,7 +159,7 @@ function ListeDetenusPersonnel() {
                                 <label>Description:</label>
                                 <input type="text" placeholder='...' id="description" onChange={e => setValues({ ...values, description: e.target.value })} />
                                 <label>Date:</label>
-                                <input type="date" id="date" onChange={e => setValues({ ...values, date: e.target.value })} />
+                                <input type="date" max={new Date().toISOString().split('T')[0]} id="date" onChange={e => setValues({ ...values, date: e.target.value })} />
                             </div>
                             <br />
                             {

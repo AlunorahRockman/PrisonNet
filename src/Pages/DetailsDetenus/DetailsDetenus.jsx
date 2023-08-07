@@ -22,7 +22,7 @@ function DetailsDetenus() {
     const [raison, setRaison] = useState('')
     const [image, setImage] = useState('')
     const [idDetenus, setIdDetenus] = useState(0)
-
+    const [statut, setStatut] = useState(null)
     const [errors, setErrors] = useState([])
 
     useEffect(() => {
@@ -43,6 +43,7 @@ function DetailsDetenus() {
                     setRaison(data.raison)
                     setImage(data.image)
                     setIdDetenus(data.id)
+                    setStatut(data.statut)
                 }
             } catch (error) {
                 console.error(error);
@@ -153,6 +154,15 @@ function DetailsDetenus() {
                     <p>Modifier le profil de détenus</p>
                 </div>
                 <form onSubmit={handleSubmit}>
+                    {statut === 2 && (
+                        <p className="exit-message1">Sorti de la prison</p>
+                    )}
+                    {statut === 3 && (
+                        <p className="exit-message1D">Décédé</p>
+                    )}
+                    {statut === 4 && (
+                        <p className="exit-message1E">Evasion</p>
+                    )}
                     <div className="divContenueCompte">
                         <label htmlFor="nom">Nom</label>
                         <input type="text" value={nom} onChange={(e) => setNom(e.target.value)}  id='nom'/>
@@ -203,7 +213,7 @@ function DetailsDetenus() {
                     }
                     <hr className='hr'/>
                     <div className="divButtonCompte">
-                        <button type='submit'>Modifier</button>
+                        <button disabled={statut !== 1} type='submit'>Modifier</button>
                     </div>
                     <p className='p'>Retour à la <Link to = {'/prisonniersPage '}>liste des détenus</Link></p>
                 </form>
@@ -229,13 +239,13 @@ function DetailsDetenus() {
                         )}
                         <div className="inputBtn">
                             <label htmlFor="file">Importer une photo</label>
-                            <input type="file" onChange={handleFileChange} id='file'/>
+                            <input type="file" disabled={statut !== 1} onChange={handleFileChange} id='file'/>
                         </div>
                     </div>
 
                     <div className="divBtn">
                         <hr className='hr'/>
-                        {showSaveButton && <button onClick={handleUpload}>Enregistrer</button>}
+                        {showSaveButton && <button disabled={statut !== 1} onClick={handleUpload}>Enregistrer</button>}
                     </div>
                 </div>
             </div>

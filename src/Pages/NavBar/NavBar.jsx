@@ -21,6 +21,17 @@ function NavBar() {
 
     const [dataUser, setDataUser] = useState([])
 
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            let response = await axios.get(`http://localhost:5000/getNotification/${user.id}`);
+            response = await response.data;
+            setNotifitionList(response)
+            console.log(notificationList)
+        };
+        fetchData()
+    }, [user.id]);
+
     useEffect(() => {
         const fetchData = async () => {
             let resultat = await axios.get(`http://localhost:5000/getOneUsers/${user.id}`);
@@ -52,31 +63,20 @@ function NavBar() {
         setShowProfileDropdown(!showProfileDropdown);
     };
 
-    useEffect(()=>{
-        if(!socket)return
-
-        socket.emit('join-notification', {
-            me:user.id,
-        })
-
-        socket.on('new-notification', data=>{
-            console.log(notificationList)
-            setNotifitionList([...notificationList, data])
-        })
-
-    }, [socket])
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:5000/getNotification/${user.id}`);
-                setNotifitionList(response.data);
-            } catch (error) {
-                console.error('Error fetching users:', error);
-            }
-        };
-        fetchData()
-    }, []);
+        if (!socket) return;
+    
+        socket.on('new-notification', data => {
+            console.log(data);
+            setNotifitionList(notifications => {
+                const newNotificationList = [data, ...notifications];
+                return newNotificationList;
+            });
+        });
+    
+    }, [socket]);
+    
+
 
     return (
         <div className="navContainer">
@@ -115,22 +115,21 @@ function NavBar() {
                     </div>
                     <div className="divContainerNotif">
                         
-                    {notificationList.map((item, index) => {
-                        <Link to={`/${item.link}`}>
+                    {notificationList.map((notification, index) => (
+                        <Link key={index} to={`${notification.link}`}>
                             <div className="contenueNotif">
                                 <div className="coucheContenue">
                                     <div className="imageNotif">
-                                        <img src={`http://localhost:5000/images/${item.sender.image}`}/>
+                                        <img src={`http://localhost:5000/images/${notification.senderNotif.image}`}/>
                                     </div>
                                     <div className="descriptionNotif">
-                                        <h6>{item.sender.nom}</h6>
-                                        <p>{item.message}</p>
+                                        <h6>{notification.senderNotif.nom}</h6>
+                                        <p>{notification.message}</p>
                                     </div>
                                 </div>
                             </div>
                         </Link>
-                    })}
-
+                    ))}
 
                     </div>
                 </div>
